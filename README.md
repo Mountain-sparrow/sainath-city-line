@@ -1,6 +1,6 @@
 # Sainath's City Line
 
-My personal portfolio, built as a train ride: Puttaparthi, then Chennai, then remote work.
+My personal portfolio, built as a train ride: Puttaparthi, Chennai, Hyderabad, Chennai again, then remote work from Anantapur.
 Scroll to drive the Sai Express past each career stop and skill upgrade.
 
 - Single self-contained `index.html` plus `portrait.jpg`
@@ -8,5 +8,5 @@ Scroll to drive the Sai Express past each career stop and skill upgrade.
 
 Editing tips:
 - Landmark text lives in the `const D = {...}` block near the bottom of `index.html`.
-- Mobile number: set `const PHONE = ''` in `index.html`.
+- Mobile number: `const PHONE` in `index.html`.
 - Books: edit the `BOOKS` list at the top of the script in `reads.html`.

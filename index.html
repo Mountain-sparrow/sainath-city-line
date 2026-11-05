@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Sainath Reddy: finance and AI translator. A train ride from Puttaparthi to Chennai to remote work.">
+<meta name="description" content="Sainath Reddy: finance and AI translator. A train ride from Puttaparthi to Chennai, Hyderabad and remote work from Anantapur.">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Sainath's City Line</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -180,14 +180,14 @@ body{background:var(--night);color:var(--paper);font-family:var(--f-body);font-s
 <body>
 
 
-<section class="ride" id="ride" aria-label="Journey from Puttaparthi to Chennai to remote work">
+<section class="ride" id="ride" aria-label="Journey from Puttaparthi to Chennai, Hyderabad, Chennai again, and remote work from Anantapur">
   <div class="stage" id="stage">
     <div class="sky" id="sky"></div>
     <div class="stars" id="stars"></div>
     <div class="sun" id="sun"></div>
     <div class="moon" id="moon"></div>
     <svg class="layer" id="far" viewBox="0 0 3400 600" preserveAspectRatio="none" aria-hidden="true"><path id="farPath" fill="#d38a5a"/></svg>
-    <svg class="layer" id="world" viewBox="0 0 4800 600" preserveAspectRatio="none"></svg>
+    <svg class="layer" id="world" viewBox="0 0 6400 600" preserveAspectRatio="none"></svg>
 
     <div class="hero" id="hero">
       <div class="eyebrow">The Translator · Finance × AI</div>
@@ -216,7 +216,7 @@ body{background:var(--night);color:var(--paper);font-family:var(--f-body);font-s
   <div class="wrap">
     <div>
       <h2>The line so far</h2>
-      <p class="lede">The same journey, minus the train. Three cities, three careers, three skill upgrades with a fourth under construction, and one habit that never changed: making finance work faster, smarter and easier to audit.</p>
+      <p class="lede">The same journey, minus the train. Four cities (Chennai twice), three careers, three skill upgrades with a fourth under construction, and one habit that never changed: making finance work faster, smarter and easier to audit.</p>
     </div>
     <div class="about">
       <img src="portrait.jpg" alt="Portrait of Sainath Reddy" width="420" height="420">
@@ -232,11 +232,13 @@ body{background:var(--night);color:var(--paper);font-family:var(--f-body);font-s
           <li class="city"><b>Puttaparthi</b><small>Andhra Pradesh · born and raised</small></li>
           <li><b>B.Sc. Mathematics, Statistics &amp; Computer Science</b><small>Sri Krishnadevaraya University</small></li>
           <li><b>Diploma in Portuguese</b><small>Camões</small></li>
-          <li class="city"><b>Chennai</b><small>Tamil Nadu</small></li>
+          <li class="city"><b>Chennai</b><small>Tamil Nadu · first job</small></li>
           <li><b>Portuguese Language Expert</b><small>Accenture</small></li>
+          <li class="city"><b>Hyderabad</b><small>Telangana · remote assignment</small></li>
           <li><b>Finance Specialist</b><small>Corteva Agriscience</small></li>
+          <li class="city"><b>Chennai, again</b><small>Tamil Nadu · from 2022</small></li>
           <li><b>Pricing &amp; Sales Compensation Analyst</b><small>Lennox</small></li>
-          <li class="city"><b>Remote</b><small>Anywhere with wifi</small></li>
+          <li class="city"><b>Anantapur</b><small>Andhra Pradesh · remote, from Aug 2026</small></li>
           <li><b>Senior Sales Compensation Specialist</b><small>Sealed Air · owns the monthly SIP cycle</small></li>
         </ol>
       </div>
@@ -256,7 +258,7 @@ body{background:var(--night);color:var(--paper);font-family:var(--f-body);font-s
     <a class="stall" href="reads.html">
       <span class="stall-k">Platform bookstall</span>
       <span class="stall-t">What I am reading</span>
-      <span class="stall-s">Books on the go, short summaries, and soon the code snippets they inspired.</span>
+      <span class="stall-s">Favourites, Telugu classics and what is on the go, with short summaries and the code snippets they inspired.</span>
       <span class="stall-go">Open the bookstall</span>
     </a>
     <section class="contact" aria-labelledby="ctT">
@@ -273,7 +275,7 @@ body{background:var(--night);color:var(--paper);font-family:var(--f-body);font-s
 
 <script>
 (function(){
-const W=4800, G=455;
+const W=6400, G=455;
 const $=s=>document.getElementById(s);
 const world=$('world'), far=$('far'), ride=$('ride'), stage=$('stage');
 
@@ -306,9 +308,9 @@ wheelX.forEach((x,i)=>s+=`<g class="wh" data-x="${x}"><circle cx="${x}" cy="472"
 
 /* ---------- build world ---------- */
 let svg=`<defs>
-<linearGradient id="groundG" x1="0" x2="4800" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#b5552f"/><stop offset=".3" stop-color="#b5552f"/><stop offset=".36" stop-color="#9c907f"/><stop offset=".56" stop-color="#9c907f"/><stop offset=".58" stop-color="#e4cd98"/><stop offset=".69" stop-color="#e4cd98"/><stop offset=".74" stop-color="#151b40"/><stop offset="1" stop-color="#0d1230"/></linearGradient>
-<linearGradient id="railG" x1="0" x2="4800" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3b3b3b"/><stop offset=".7" stop-color="#4a4a4a"/><stop offset=".76" stop-color="#7ef0ff"/><stop offset="1" stop-color="#9b8cff"/></linearGradient>
-<linearGradient id="ballastG" x1="0" x2="4800" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5c4d44"/><stop offset=".7" stop-color="#5c5550"/><stop offset=".76" stop-color="#1b2150"/><stop offset="1" stop-color="#151a44"/></linearGradient>
+<linearGradient id="groundG" x1="0" x2="6400" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#b5552f"/><stop offset=".23" stop-color="#b5552f"/><stop offset=".26" stop-color="#9c907f"/><stop offset=".43" stop-color="#9c907f"/><stop offset=".45" stop-color="#b9a688"/><stop offset=".6" stop-color="#b9a688"/><stop offset=".62" stop-color="#9c907f"/><stop offset=".645" stop-color="#e4cd98"/><stop offset=".745" stop-color="#e4cd98"/><stop offset=".78" stop-color="#151b40"/><stop offset="1" stop-color="#0d1230"/></linearGradient>
+<linearGradient id="railG" x1="0" x2="6400" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3b3b3b"/><stop offset=".76" stop-color="#4a4a4a"/><stop offset=".8" stop-color="#7ef0ff"/><stop offset="1" stop-color="#9b8cff"/></linearGradient>
+<linearGradient id="ballastG" x1="0" x2="6400" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5c4d44"/><stop offset=".76" stop-color="#5c5550"/><stop offset=".8" stop-color="#1b2150"/><stop offset="1" stop-color="#151a44"/></linearGradient>
 <linearGradient id="beamG" x1="0" x2="1"><stop offset="0" stop-color="#ffe68a" stop-opacity=".9"/><stop offset="1" stop-color="#ffe68a" stop-opacity="0"/></linearGradient>
 <linearGradient id="lhG" x1="0" x2="1"><stop offset="0" stop-color="#fff3b0" stop-opacity=".8"/><stop offset="1" stop-color="#fff3b0" stop-opacity="0"/></linearGradient>
 <pattern id="az" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#f7faff"/><path d="M7 1 L13 7 L7 13 L1 7Z" fill="none" stroke="#2f5fa7" stroke-width="1.4"/><circle cx="7" cy="7" r="2" fill="#2f5fa7"/></pattern>
@@ -318,15 +320,15 @@ let svg=`<defs>
 </defs>`;
 
 /* sky details */
-svg+=cloud(560,120)+cloud(1320,86,.8)+cloud(2080,110,1.1)+cloud(2660,70,.7);
+svg+=cloud(560,120)+cloud(1320,86,.8)+cloud(2080,110,1.1)+cloud(2660,70,.7)+cloud(3350,100,.9)+cloud(3900,80,.8);
 svg+='<g stroke="#3a2a1a" stroke-width="2" fill="none"><path d="M220 150 q8 -8 16 0 q8 -8 16 0"/><path d="M270 130 q6 -6 12 0 q6 -6 12 0"/><path d="M860 170 q7 -7 14 0 q7 -7 14 0"/></g>';
 /* remote sky: satellite */
-svg+='<g transform="translate(3860,120)"><rect x="-8" y="-6" width="16" height="12" fill="#cfd6ff"/><rect x="-34" y="-4" width="22" height="8" fill="#5d86a8"/><rect x="12" y="-4" width="22" height="8" fill="#5d86a8"/><circle cx="0" cy="10" r="2" fill="#7ef0ff" class="node"/></g>';
+svg+='<g transform="translate(5460,120)"><rect x="-8" y="-6" width="16" height="12" fill="#cfd6ff"/><rect x="-34" y="-4" width="22" height="8" fill="#5d86a8"/><rect x="12" y="-4" width="22" height="8" fill="#5d86a8"/><circle cx="0" cy="10" r="2" fill="#7ef0ff" class="node"/></g>';
 
 /* ground */
 svg+=`<rect x="0" y="${G}" width="${W}" height="${600-G}" fill="url(#groundG)"/>`;
-svg+='<rect x="2760" y="514" width="620" height="86" fill="#2f86b8"/><path d="M2760 520 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" stroke="#e8f6ff" stroke-width="3" fill="none"/>';
-svg+='<g fill="none" stroke-width="2"><path class="fiber" d="M3500 530 H4800" stroke="#7ef0ff"/><path class="fiber" d="M3560 556 H4800" stroke="#9b8cff" style="animation-delay:.5s"/></g>';
+svg+='<rect x="4160" y="514" width="620" height="86" fill="#2f86b8"/><path d="M4160 520 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" stroke="#e8f6ff" stroke-width="3" fill="none"/>';
+svg+='<g fill="none" stroke-width="2"><path class="fiber" d="M5100 530 H6400" stroke="#7ef0ff"/><path class="fiber" d="M5160 556 H6400" stroke="#9b8cff" style="animation-delay:.5s"/></g>';
 
 /* ---- Puttaparthi ---- */
 svg+='<path d="M-10 455 Q20 372 76 366 Q126 360 146 404 Q166 384 196 394 Q236 410 262 455Z" fill="#8c6a55"/><ellipse cx="96" cy="372" rx="30" ry="20" fill="#9d7b63"/><ellipse cx="190" cy="392" rx="22" ry="14" fill="#7c5d4a"/><ellipse cx="60" cy="400" rx="18" ry="12" fill="#a8866d"/>';
@@ -350,20 +352,35 @@ let cc='<rect x="1860" y="350" width="380" height="105" fill="#b4452f"/><rect x=
 [1860,2222].forEach(x=>cc+=`<rect x="${x}" y="312" width="18" height="143" fill="#b4452f"/><path d="M${x-3} 314 Q${x+9} 290 ${x+21} 314Z" fill="#8f3322"/>`);
 for(let r=0;r<2;r++)for(let i=0;i<12;i++){const x=1886+i*28;if(x>2006&&x<2090)continue;cc+=`<path d="M${x} ${404+r*-42} v-18 q7 -9 14 0 v18Z" fill="#f1e6d6"/>`;}
 svg+=lm('accenture','Language Expert · Accenture',2050,128,cc);
-svg+=lm('corteva','Finance Specialist · Corteva',2370,140,'<rect x="2314" y="182" width="112" height="10" fill="#d8d2c6"/><rect x="2320" y="190" width="100" height="265" fill="url(#win)"/>');
+svg+='<rect x="2314" y="182" width="112" height="10" fill="#d8d2c6"/><rect x="2320" y="190" width="100" height="265" fill="url(#win)"/>';
 svg+=lm('cma','CMA (US)',2590,160,gopuram(2590));
 svg+=`<g transform="translate(2700,430)"><path d="M0 26 L0 6 Q4 -6 22 -6 L44 -6 L48 26Z" fill="#f1c232"/><path d="M2 2 Q8 -14 26 -14 L44 -14 L44 -6 L4 -6Z" fill="#1f1f1f"/><circle cx="8" cy="28" r="6" fill="#222"/><circle cx="40" cy="28" r="6" fill="#222"/></g>`;
-let lh='<polygon class="beam" points="2905,194 3260,150 3260,250" fill="url(#lhG)"/><path d="M2880 455 L2889 215 L2921 215 L2930 455Z" fill="#ecebe6"/><rect x="2884" y="300" width="42" height="14" fill="#c2402f"/><rect x="2882" y="380" width="46" height="14" fill="#c2402f"/><rect x="2878" y="207" width="54" height="8" fill="#333"/><rect x="2891" y="182" width="28" height="25" fill="#ffe28a"/><path d="M2886 182 L2905 164 L2924 182Z" fill="#c2402f"/>';
-svg+=lm('dsml','Data Science & ML',2905,116,lh);
-svg+=lm('lennox','Pricing & Sales Comp · Lennox',3185,236,'<rect x="3110" y="300" width="150" height="155" fill="url(#glass)"/><rect x="3104" y="294" width="162" height="8" fill="#26394d"/><rect x="3136" y="276" width="44" height="18" fill="#cfd6dc"/><circle cx="3158" cy="285" r="6" fill="none" stroke="#7a8691" stroke-width="2"/><rect x="3196" y="282" width="30" height="12" fill="#cfd6dc"/>');
 
-/* ---- Remote ---- */
-svg+=`<g><rect x="3442" y="372" width="6" height="83" fill="#2a2f5c"/><rect x="3592" y="372" width="6" height="83" fill="#2a2f5c"/><rect x="3428" y="342" width="184" height="62" rx="4" fill="#10163a" stroke="#7ef0ff" stroke-width="2.5"/><text class="b-neon-s" x="3520" y="366" text-anchor="middle">ఎక్కడైనా</text><text class="b-neon" x="3520" y="393" text-anchor="middle">REMOTE</text></g>`;
+/* ---- Hyderabad ---- */
+svg+='<rect x="2810" y="444" width="180" height="12" fill="#8a8580"/>'+board(2900,'హైదరాబాద్','b-nat-te','HYDERABAD');
+let ch='<rect x="3112" y="330" width="176" height="125" fill="#dcc9a3"/><rect x="3108" y="322" width="184" height="10" fill="#efe3c8"/><path d="M3150 455 L3150 392 Q3200 318 3250 392 L3250 455Z" fill="#7a5a3c"/>';
+for(let i=0;i<6;i++)ch+=`<path d="M${3122+i*27} 316 v-16 q8 -10 16 0 v16Z" fill="#efe3c8"/>`;
+ch+='<rect x="3118" y="298" width="164" height="4" fill="#c9b38a"/><path d="M3172 298 Q3200 262 3228 298Z" fill="#dcc9a3"/>';
+[3104,3278].forEach(x=>{ch+=`<rect x="${x}" y="196" width="18" height="259" fill="#dcc9a3"/>`;[300,250,210].forEach(y=>ch+=`<rect x="${x-4}" y="${y}" width="26" height="6" fill="#efe3c8"/>`);ch+=`<path d="M${x-2} 198 Q${x+9} 172 ${x+20} 198Z" fill="#c9b38a"/><line x1="${x+9}" y1="182" x2="${x+9}" y2="170" stroke="#8a6d45" stroke-width="2"/>`;});
+svg+=lm('corteva','Finance Specialist · Corteva',3200,130,ch);
+svg+='<rect x="3520" y="216" width="90" height="239" fill="url(#glass)"/><rect x="3514" y="208" width="102" height="10" fill="#26394d"/><rect x="3630" y="286" width="74" height="169" fill="url(#win)"/>';
+svg+='<g><ellipse cx="3800" cy="430" rx="52" ry="28" fill="#8c7a66"/><ellipse cx="3790" cy="392" rx="34" ry="22" fill="#9d8a74"/><ellipse cx="3802" cy="364" rx="20" ry="14" fill="#7c6b58"/><ellipse cx="3860" cy="440" rx="30" ry="18" fill="#a28f78"/></g>';
+svg+=palm(3720,.9);
+
+/* ---- Chennai, round two ---- */
+svg+='<rect x="3960" y="444" width="180" height="12" fill="#8a8580"/>'+board(4050,'சென்னை','b-nat-ta','CHENNAI AGAIN');
+svg+=`<g transform="translate(4150,430)"><path d="M0 26 L0 6 Q4 -6 22 -6 L44 -6 L48 26Z" fill="#f1c232"/><path d="M2 2 Q8 -14 26 -14 L44 -14 L44 -6 L4 -6Z" fill="#1f1f1f"/><circle cx="8" cy="28" r="6" fill="#222"/><circle cx="40" cy="28" r="6" fill="#222"/></g>`;
+let lh='<polygon class="beam" points="2905,194 3260,150 3260,250" fill="url(#lhG)"/><path d="M2880 455 L2889 215 L2921 215 L2930 455Z" fill="#ecebe6"/><rect x="2884" y="300" width="42" height="14" fill="#c2402f"/><rect x="2882" y="380" width="46" height="14" fill="#c2402f"/><rect x="2878" y="207" width="54" height="8" fill="#333"/><rect x="2891" y="182" width="28" height="25" fill="#ffe28a"/><path d="M2886 182 L2905 164 L2924 182Z" fill="#c2402f"/>';
+svg+='<g transform="translate(1400,0)">'+lm('dsml','Data Science & ML',2905,116,lh)+'</g>';
+svg+='<g transform="translate(1400,0)">'+lm('lennox','Pricing & Sales Comp · Lennox',3185,236,'<rect x="3110" y="300" width="150" height="155" fill="url(#glass)"/><rect x="3104" y="294" width="162" height="8" fill="#26394d"/><rect x="3136" y="276" width="44" height="18" fill="#cfd6dc"/><circle cx="3158" cy="285" r="6" fill="none" stroke="#7a8691" stroke-width="2"/><rect x="3196" y="282" width="30" height="12" fill="#cfd6dc"/>')+'</g>';
+
+/* ---- Remote · Anantapur ---- */
+svg+=`<g transform="translate(1600,0)"><g><rect x="3442" y="372" width="6" height="83" fill="#2a2f5c"/><rect x="3592" y="372" width="6" height="83" fill="#2a2f5c"/><rect x="3428" y="342" width="184" height="62" rx="4" fill="#10163a" stroke="#7ef0ff" stroke-width="2.5"/><text class="b-neon-s" x="3520" y="366" text-anchor="middle">అనంతపురం</text><text class="b-neon" x="3520" y="393" text-anchor="middle">ANANTAPUR</text></g></g>`;
 let home='<rect x="3640" y="345" width="220" height="110" fill="#283063"/><path d="M3624 348 L3750 284 L3876 348Z" fill="#1b214b"/><rect x="3680" y="368" width="140" height="64" fill="#ffcf73"/><rect x="3700" y="413" width="100" height="5" fill="#5a3e2a"/><rect x="3730" y="388" width="42" height="25" rx="2" fill="#1b1f3a"/><rect x="3733" y="391" width="36" height="19" fill="#7ef0ff"/><g fill="#1b1f3a"><rect x="3737" y="402" width="5" height="6"/><rect x="3745" y="398" width="5" height="10"/><rect x="3753" y="395" width="5" height="13"/><rect x="3761" y="393" width="5" height="15"/></g><rect x="3724" y="413" width="54" height="3" fill="#cfd6ff"/><circle cx="3806" cy="404" r="9" fill="#3f7a3a"/><rect x="3802" y="410" width="8" height="8" fill="#a0522d"/><g fill="none" stroke="#7ef0ff" stroke-width="3" stroke-linecap="round"><path d="M3736 268 q14 -12 28 0"/><path d="M3728 258 q22 -20 44 0" opacity=".7"/><path d="M3720 248 q30 -28 60 0" opacity=".45"/></g>';
-svg+=lm('sealedair','Sr. Sales Comp · Sealed Air',3750,196,home);
-svg+=lm('markets','US & LATAM',4080,170,clockSvg());
-svg+=lm('fabric','AI & Fabric · ongoing',4370,124,fabric());
-svg+=lm('next','Next station',4660,300,'<rect x="4590" y="372" width="6" height="83" fill="#2a2f5c"/><rect x="4724" y="372" width="6" height="83" fill="#2a2f5c"/><rect x="4570" y="342" width="180" height="62" rx="4" fill="#f5c518" stroke="#141414" stroke-width="3"/><text x="4660" y="366" text-anchor="middle" style="font:500 10px var(--f-mono);letter-spacing:.14em;fill:#111">NEXT STATION</text><text class="b-eng" x="4660" y="393" text-anchor="middle" style="font-size:19px">LOADING<tspan class="dot">.</tspan><tspan class="dot" style="animation-delay:.3s">.</tspan><tspan class="dot" style="animation-delay:.6s">.</tspan></text>');
+svg+='<g transform="translate(1600,0)">'+lm('sealedair','Sr. Sales Comp · Sealed Air',3750,196,home)+'</g>';
+svg+='<g transform="translate(1600,0)">'+lm('markets','US & LATAM',4080,170,clockSvg())+'</g>';
+svg+='<g transform="translate(1600,0)">'+lm('fabric','AI & Fabric · ongoing',4370,124,fabric())+'</g>';
+svg+='<g transform="translate(1600,0)">'+lm('next','Next station',4660,300,'<rect x="4590" y="372" width="6" height="83" fill="#2a2f5c"/><rect x="4724" y="372" width="6" height="83" fill="#2a2f5c"/><rect x="4570" y="342" width="180" height="62" rx="4" fill="#f5c518" stroke="#141414" stroke-width="3"/><text x="4660" y="366" text-anchor="middle" style="font:500 10px var(--f-mono);letter-spacing:.14em;fill:#111">NEXT STATION</text><text class="b-eng" x="4660" y="393" text-anchor="middle" style="font-size:19px">LOADING<tspan class="dot">.</tspan><tspan class="dot" style="animation-delay:.3s">.</tspan><tspan class="dot" style="animation-delay:.6s">.</tspan></text>')+'</g>';
 
 /* track */
 svg+=`<rect x="0" y="482" width="${W}" height="22" fill="url(#ballastG)"/><rect x="0" y="482" width="${W}" height="8" fill="url(#sleep)" opacity=".9"/><rect x="0" y="477" width="${W}" height="5" fill="url(#railG)"/>`;
@@ -382,14 +399,14 @@ const D={
  pilot:{k:'Loco pilot',t:'Sainath, driving',o:'Sai Express · all stations',b:['<p>The guy in the cab is me. Same curls, same beard, slightly more official cap. Indian Railways calls its drivers loco pilots, so technically this is a pilot job.</p>']},
  roots:{k:'Puttaparthi · Andhra Pradesh',t:'Where it started',o:'Born here · studied here till graduation',b:['<p>Born in Puttaparthi and studied here all the way to graduation. Honestly, it felt a bit boring at the start. Turns out that was just the plot loading.</p>','<ul><li>B.Sc. in Mathematics, Statistics and Computer Science, Sri Krishnadevaraya University</li><li>Learned early that numbers tell stories, if you ask them nicely</li></ul>']},
  portuguese:{k:'Puttaparthi · skill upgrade 1',t:'Portuguese',o:'Diploma in Portuguese · Camões',b:['<p>Picked up Portuguese properly, with a diploma to prove it. It became my first ticket out of town, and later the bridge to LATAM markets.</p>','<ul><li>Five languages: Telugu, English, Portuguese, Spanish, Tamil</li></ul>'],s:'Skill stamped'},
- accenture:{k:'Chennai · career 1',t:'Portuguese Language Expert',o:'Accenture',b:['<p>First stop in Chennai. Portuguese every day at work, and my first close look at finance operations from the inside.</p>']},
- corteva:{k:'Chennai · career 2',t:'Finance Specialist',o:'Corteva Agriscience',b:['<p>The switch from words to numbers. Pricing and financial operations for US and LATAM markets, where knowing the language and the ledger both paid off.</p>']},
+ accenture:{k:'Chennai · career 1',t:'Portuguese Language Expert',o:'Accenture · Chennai',b:['<p>Where the career started. Portuguese every day at work, and my first close look at finance operations from the inside.</p>']},
+ corteva:{k:'Hyderabad · career 2',t:'Finance Specialist',o:'Corteva Agriscience · Hyderabad',b:['<p>Next stop Hyderabad, on a remote assignment with Corteva, and the switch from words to numbers. Pricing and financial operations for US and LATAM markets, where knowing the language and the ledger both paid off.</p>']},
  cma:{k:'Chennai · skill upgrade 2',t:'CMA (US)',o:'Certified Management Accountant',b:['<p>Two exam parts and many weekends. Planning, budgeting, controls, cost management and decision analysis.</p>','<p>A gopuram felt right for this one: you climb it one tier at a time.</p>'],s:'Skill stamped'},
- dsml:{k:'Chennai · skill upgrade 3',t:'Data Science & ML',o:'PG Diploma · UT Austin',b:['<p>Learning to see further out to sea. Python, statistics and machine learning, pointed at one goal: finance work that is faster, smarter and easier to audit.</p>'],s:'Skill stamped'},
- lennox:{k:'Chennai · on the way to comp',t:'Pricing & Sales Compensation Analyst',o:'Lennox',b:['<p>Pricing, sales compensation and reporting. Fitting that an HVAC company is where I learned to keep things cool at month end.</p>']},
- sealedair:{k:'Remote · career 3',t:'Senior Sales Compensation Specialist',o:'Sealed Air · fully remote',b:['<p>I own the monthly SIP (Sales Incentive Plan) cycle end to end, working with Sales, Finance and HR so reps get paid right and on time.</p>','<ul><li>SAP Commissions (Callidus), SAP GUI scripting</li><li>Python, VBA, Power Automate Desktop, Excel automation</li><li>Power BI</li></ul>']},
- markets:{k:'Remote · three time zones',t:'US & LATAM, one desk',o:'6+ years across markets',b:['<p>Pricing, sales comp and financial operations across US and LATAM. The clocks here show the real time right now in Chennai, the US East Coast and São Paulo.</p>']},
- fabric:{k:'Remote · ongoing project',t:'AI & Microsoft Fabric',o:'Ongoing · not finished yet',b:['<p>The current build, scaffolding still up and the crane still swinging. Microsoft Fabric, semantic modeling, Power BI, and AI agents that take the grunt work out of finance.</p>'],s:'Under construction'},
+ dsml:{k:'Chennai · skill upgrade 3',t:'Data Science & ML',o:'PG Program · UT Austin McCombs, with Great Learning',b:['<p>Learning to see further out to sea. Python, statistics and machine learning, pointed at one goal: finance work that is faster, smarter and easier to audit.</p>'],s:'Skill stamped'},
+ lennox:{k:'Chennai, round two · from 2022',t:'Pricing & Sales Compensation Analyst',o:'Lennox · Chennai',b:['<p>Back in Chennai in 2022. Pricing, sales compensation and reporting. Fitting that an HVAC company is where I learned to keep things cool at month end.</p>']},
+ sealedair:{k:'Anantapur · career 3',t:'Senior Sales Compensation Specialist',o:'Sealed Air · fully remote from Anantapur',b:['<p>Since August 2026 I work from Anantapur, back near where it all started. I own the monthly SIP (Sales Incentive Plan) cycle end to end with Sales, Finance and HR, and focus on stronger controls and validation, cleaner execution, and automating whatever can be automated.</p>','<ul><li>SAP Commissions (Callidus), SAP GUI scripting</li><li>Python, VBA, Power Automate Desktop, Excel automation</li><li>Power BI</li></ul>']},
+ markets:{k:'Anantapur · three time zones',t:'US & LATAM, one desk',o:'6+ years across markets',b:['<p>Pricing, sales comp and financial operations across US and LATAM. The clocks here show the real time right now in Chennai, the US East Coast and São Paulo.</p>']},
+ fabric:{k:'Anantapur · ongoing project',t:'AI & Microsoft Fabric',o:'Ongoing · not finished yet',b:['<p>The current build, scaffolding still up and the crane still swinging. Microsoft Fabric, semantic modeling, Power BI, and AI agents that take the grunt work out of finance.</p>','<p>Lately: the Claude Code course from DeepLearning.AI, and hands-on MCP experiments with Figma, Playwright and Excalidraw.</p>'],s:'Under construction'},
  next:{k:'Next station',t:'Loading...',o:'The line keeps going',b:['<p>Same as Puttaparthi: the plot is still loading. AI and Microsoft Fabric are on the tracks, and the next platform is wherever finance needs a translator for AI. Want to ride along? Say hello.</p>','<div class="mail">reddysainath286@gmail.com</div>']}
 };
 const panel=$('panel'),pBody=$('pBody');let lastFocus=null;
@@ -399,19 +416,19 @@ world.addEventListener('click',e=>{const g=e.target.closest('.lm');if(g)openP(g.
 world.addEventListener('keydown',e=>{const g=e.target.closest('.lm');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openP(g.dataset.id);}});
 $('pClose').addEventListener('click',closeP);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)closeP();});
-const PHONE=''; /* add mobile number here, e.g. '+91 98xxxxxxx' */
+const PHONE='+91 91770 48939'; /* add mobile number here, e.g. '+91 98xxxxxxx' */
 if(PHONE){$('phone').textContent=PHONE;$('phoneRow').hidden=false;$('copyPhone').addEventListener('click',()=>{try{navigator.clipboard.writeText(PHONE).then(()=>{$('copyPhone').textContent='Copied';setTimeout(()=>$('copyPhone').textContent='Copy',1600);},()=>{});}catch(e){}});}
 $('copyMail').addEventListener('click',()=>{const t='reddysainath286@gmail.com',b=$('copyMail');const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600);};try{navigator.clipboard.writeText(t).then(done,()=>{sel();});}catch(e){sel();}function sel(){const r=document.createRange();r.selectNodeContents($('mail'));const s=getSelection();s.removeAllRanges();s.addRange(r);}});
 
 /* ---------- sky keys ---------- */
-const keys=[{q:0,t:'#f3a56c',b:'#fde0bb',f:'#d38a5a',s:'#ffe7a8'},{q:.2,t:'#f7c99a',b:'#fdf0dc',f:'#c99a78',s:'#fff3c4'},{q:.3,t:'#6fb8e6',b:'#d3eefa',f:'#8db3c4',s:'#fffbe8'},{q:.55,t:'#79bde6',b:'#e3f1f4',f:'#93b6c0',s:'#fffbe8'},{q:.66,t:'#e5774f',b:'#f8c27c',f:'#b86a4f',s:'#ffd38a'},{q:.75,t:'#232a5c',b:'#4b437e',f:'#2b2d5a',s:'#ffd38a'},{q:.86,t:'#060a1d',b:'#161d44',f:'#11163a',s:'#ffd38a'},{q:1,t:'#060a1d',b:'#161d44',f:'#11163a',s:'#ffd38a'}];
+const keys=[{q:0,t:'#f3a56c',b:'#fde0bb',f:'#d38a5a',s:'#ffe7a8'},{q:.15,t:'#f7c99a',b:'#fdf0dc',f:'#c99a78',s:'#fff3c4'},{q:.25,t:'#6fb8e6',b:'#d3eefa',f:'#8db3c4',s:'#fffbe8'},{q:.62,t:'#79bde6',b:'#e3f1f4',f:'#93b6c0',s:'#fffbe8'},{q:.7,t:'#e5774f',b:'#f8c27c',f:'#b86a4f',s:'#ffd38a'},{q:.78,t:'#232a5c',b:'#4b437e',f:'#2b2d5a',s:'#ffd38a'},{q:.87,t:'#060a1d',b:'#161d44',f:'#11163a',s:'#ffd38a'},{q:1,t:'#060a1d',b:'#161d44',f:'#11163a',s:'#ffd38a'}];
 const hx=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
 const mix=(a,b,t)=>{const A=hx(a),B=hx(b);return 'rgb('+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(',')+')';};
 const ss=(a,b,x)=>{const t=Math.min(1,Math.max(0,(x-a)/(b-a)));return t*t*(3-2*t);};
 function skyAt(q){let i=0;while(i<keys.length-2&&q>keys[i+1].q)i++;const A=keys[i],B=keys[i+1],t=Math.min(1,Math.max(0,(q-A.q)/(B.q-A.q)));return{t:mix(A.t,B.t,t),b:mix(A.b,B.b,t),f:mix(A.f,B.f,t),s:mix(A.s,B.s,t)};}
 
-const zones=[{x:0,n:'Puttaparthi',s:'Andhra Pradesh · dawn'},{x:1660,n:'Chennai',s:'Tamil Nadu · by the sea'},{x:3420,n:'Remote',s:'Anywhere with wifi · night shift'}];
-const careerX=[1880,2330,3660],stampX=[960,2540,2890,4320],stampN=['Portuguese','CMA (US)','Data Science & ML','AI & Microsoft Fabric'];
+const zones=[{x:0,n:'Puttaparthi',s:'Andhra Pradesh · dawn'},{x:1660,n:'Chennai',s:'Tamil Nadu · first job'},{x:2780,n:'Hyderabad',s:'Telangana · the Corteva years'},{x:3960,n:'Chennai',s:'Tamil Nadu · round two, from 2022'},{x:5020,n:'Anantapur',s:'Andhra Pradesh · remote, from Aug 2026'}];
+const careerX=[1880,3120,5260],stampX=[960,2540,4260,5920],stampN=['Portuguese','CMA (US)','Data Science & ML','AI & Microsoft Fabric'];
 const careerLi=[...$('career').children],stampLi=[...$('stamps').children];
 const wheels=[...world.querySelectorAll('.wh')],trainG=$('train');
 let vw=0,vh=0,scale=1,travel=0,nose=0,lastNose=-1,stampState=stampX.map(()=>false),first=true,toastT;
@@ -425,9 +442,9 @@ function update(){
   const ang=(nx*3)%360;wheels.forEach(w=>{const x=+w.dataset.x;w.setAttribute('transform',`rotate(${ang.toFixed(1)} ${x} 472)`);});
   const q=nx/W,c=skyAt(q),st=stage.style;
   st.setProperty('--sky-t',c.t);st.setProperty('--sky-b',c.b);st.setProperty('--sun',c.s);$('farPath').setAttribute('fill',c.f);
-  st.setProperty('--stars',ss(.7,.86,q).toFixed(2));st.setProperty('--moon',ss(.72,.82,q).toFixed(2));
-  const sq=Math.min(1,q/.72),sun=$('sun');sun.style.left=(8+sq*74)+'%';sun.style.top=(46-Math.sin(sq*Math.PI)*34)+'%';sun.style.opacity=(1-ss(.66,.74,q)).toFixed(2);
-  world.classList.toggle('night',q>.72);
+  st.setProperty('--stars',ss(.77,.88,q).toFixed(2));st.setProperty('--moon',ss(.78,.86,q).toFixed(2));
+  const sq=Math.min(1,q/.78),sun=$('sun');sun.style.left=(8+sq*74)+'%';sun.style.top=(46-Math.sin(sq*Math.PI)*34)+'%';sun.style.opacity=(1-ss(.7,.78,q)).toFixed(2);
+  world.classList.toggle('night',q>.775);
   $('hero').style.opacity=Math.max(0,1-p*14).toFixed(2);$('hero').style.pointerEvents=p>.06?'none':'';
   let z=zones[0];zones.forEach(Z=>{if(nx>=Z.x)z=Z;});if($('zone').textContent!==z.n){$('zone').textContent=z.n;$('zoneSub').textContent=z.s;}
   let cur=-1;careerX.forEach((x,i)=>{if(nx>=x)cur=i;});careerLi.forEach((li,i)=>{li.classList.toggle('on',i<=cur);li.classList.toggle('now',i===cur);});

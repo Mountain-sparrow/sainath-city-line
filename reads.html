@@ -7,7 +7,7 @@
 <meta name="description" content="What Sainath Reddy is reading: book cards, short summaries and the code snippets they inspired.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Noto+Sans+Telugu:wght@600;800&display=swap">
 <style>
 /* Layout: a station bookstall. Shelf of cover cards, then one book open as a ticket-style detail view (routed by #book-id). */
 :root{
@@ -23,6 +23,7 @@
   --f-disp:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
   --f-body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --f-te:"Noto Sans Telugu","Nirmala UI",sans-serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -48,11 +49,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
 
 .shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:22px;padding-bottom:18px;border-bottom:10px solid #5a3e2a;box-shadow:0 12px 0 -4px #3d2a1c}
 .book{all:unset;cursor:pointer;display:grid;grid-template-rows:auto auto;gap:10px;min-width:0}
-.cover{position:relative;aspect-ratio:2/3;max-width:100%;border-radius:3px 8px 8px 3px;padding:18px 16px 16px 22px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;box-shadow:inset 8px 0 0 rgba(0,0,0,.22),0 10px 24px rgba(0,0,0,.4);transition:transform .25s,box-shadow .25s;overflow:hidden}
+.cover{position:relative;aspect-ratio:2/3;max-width:100%;border-radius:3px 8px 8px 3px;padding:42px 16px 16px 22px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;box-shadow:inset 8px 0 0 rgba(0,0,0,.22),0 10px 24px rgba(0,0,0,.4);transition:transform .25s,box-shadow .25s;overflow:hidden}
 .cover::after{content:"";position:absolute;inset:auto -30% -30% auto;width:80%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.08)}
 .book:hover .cover,.book:focus-visible .cover{transform:translateY(-6px) rotate(-1deg);box-shadow:inset 8px 0 0 rgba(0,0,0,.22),0 18px 30px rgba(0,0,0,.5)}
 .book:focus-visible .cover{outline:3px solid var(--signal);outline-offset:3px}
-.cover .ct{font:900 26px/.95 var(--f-disp);text-transform:uppercase;text-wrap:balance;position:relative;z-index:1}
+.cover .ct{overflow-wrap:anywhere;font:900 26px/.95 var(--f-disp);text-transform:uppercase;text-wrap:balance;position:relative;z-index:1}
+.cover .te{display:block;font:800 30px/1.25 var(--f-te);text-transform:none;margin-bottom:8px}
+.cover .te-a{font:600 12px var(--f-te);text-transform:none;letter-spacing:0}
+.cover .fav{position:absolute;top:12px;left:22px;z-index:2;font:500 9.5px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;background:var(--signal);color:#111;padding:3px 7px;border-radius:3px}
 .cover .ca{font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;opacity:.9;position:relative;z-index:1}
 .meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .meta b{font-weight:600;font-size:14px;line-height:1.25;min-width:0}
@@ -60,6 +64,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
 .s-reading{color:var(--signal)}
 .s-finished{color:#9be59b}
 .s-next{color:var(--muted)}
+.ticket .native{font:800 22px/1.3 var(--f-te);color:#7a5a3c}
 
 .empty{padding:28px;border:1px dashed rgba(255,255,255,.3);border-radius:8px;color:var(--muted)}
 
@@ -110,74 +115,135 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
     title     book title
     author    author name
     status    'reading' | 'finished' | 'next'
+    fav       true to show under Favourites
+    lang      'en' or 'te' (Telugu books get their own filter)
+    native    optional title in Telugu script, nativeAuthor for the author
     color     cover colour (any CSS colour)
     tags      a few short labels
     summary   one or two short paragraphs, in your own words
-    takeaways a few bullet points
+    ideas     a few key ideas, as short bullet points
     snippets  code snippets: { title, lang, code }  (leave [] for "coming soon")
 */
 const BOOKS = [
   {
-    id: 'thinking-fast-and-slow',
-    title: 'Thinking, Fast and Slow',
-    author: 'Daniel Kahneman',
-    status: 'reading',
-    color: '#2b5aa6',
-    tags: ['Psychology', 'Decisions', 'Behavioural finance'],
+    id: 'kafka-on-the-shore', title: 'Kafka on the Shore', author: 'Haruki Murakami',
+    status: 'reading', fav: false, lang: 'en', color: '#1f5c63',
+    tags: ['Novel', 'Magical realism'],
     summary: [
-      'Kahneman splits the mind into two characters. System 1 is fast, automatic and confident. System 2 is slow, careful and lazy, so it lets System 1 drive most of the time.',
-      'Most of the book is a tour of where System 1 quietly gets things wrong: anchoring on the first number it hears, judging by whatever comes to mind easily, and feeling losses about twice as strongly as equal gains.'
+      'Two stories run side by side. Kafka Tamura, fifteen, runs away from home in Tokyo and ends up living in a quiet private library. Nakata, an old man who lost the ability to read after a strange childhood incident, can talk to cats and sets off on a journey of his own.',
+      'The two paths slowly bend toward each other through dreams, memory and fate, in the way only Murakami can pull off.'
     ],
-    takeaways: [
-      'The first number in the room anchors everyone. Worth remembering when quotas and targets get set.',
-      'Loss aversion explains why a clawback stings far more than a bonus of the same size feels good.',
-      'The planning fallacy is real: base estimates on similar past projects, not on the best case.'
+    ideas: ['Some questions are better lived with than answered.', 'Memory can be a place you visit, not just something you have.'],
+    snippets: []
+  },
+  {
+    id: 'the-silent-patient', title: 'The Silent Patient', author: 'Alex Michaelides',
+    status: 'reading', fav: false, lang: 'en', color: '#3a3a46',
+    tags: ['Novel', 'Psychological thriller'],
+    summary: [
+      'Alicia Berenson, a successful painter, shoots her husband and then never says another word. Years later, psychotherapist Theo Faber takes a job at the clinic where she is held, convinced he can get her to talk.',
+      'No spoilers here. It is a short, fast read built around one big question: why did she go silent?'
     ],
+    ideas: ['Silence can say more than a confession.', 'Every narrator has a reason for the story they choose to tell.'],
+    snippets: []
+  },
+  {
+    id: 'almanack-of-naval-ravikant', title: 'The Almanack of Naval Ravikant', author: 'Eric Jorgenson',
+    status: 'finished', fav: true, lang: 'en', color: '#2b5aa6',
+    tags: ['Wealth', 'Happiness', 'Philosophy'],
+    summary: [
+      'A collection of Naval Ravikant\'s ideas, pulled together from his tweets, podcasts and interviews. Half of it is about building wealth, half about being happy, and both halves are short enough to reread.',
+      'The core of the wealth half: build specific knowledge, take accountability, use leverage like code and media, and play long-term games with long-term people.'
+    ],
+    ideas: ['Seek wealth, not money or status.', 'Code and media are leverage that needs nobody\'s permission.', 'Happiness is a skill you can practise.'],
     snippets: [
       {
-        title: 'Loss aversion in a comp plan, roughly',
-        lang: 'python',
-        code: `def felt_value(payout_change, loss_weight=2.25, curve=0.88):
-    """Prospect-theory style value: losses hurt more than gains please."""
-    if payout_change >= 0:
-        return payout_change ** curve
-    return -loss_weight * (-payout_change) ** curve
+        title: 'Why long games win: daily compounding', lang: 'python',
+        code: `def compound(start=1.0, daily_gain=0.01, days=365):
+    """Small daily gains, compounded over a year."""
+    return start * (1 + daily_gain) ** days
 
-# A +$500 bonus vs a -$500 clawback
-print(round(felt_value(500), 1))   # feels like about +237
-print(round(felt_value(-500), 1))  # feels like about -534`
+print(round(compound(), 1))                  # 37.8x after a year of 1% better days
+print(round(compound(daily_gain=-0.01), 2))  # 0.03x if you slip 1% a day`
       }
     ]
   },
   {
-    id: 'mans-search-for-meaning',
-    title: "Man's Search for Meaning",
-    author: 'Viktor E. Frankl',
-    status: 'reading',
-    color: '#5a3e2a',
-    tags: ['Philosophy', 'Psychology', 'Resilience'],
+    id: 'the-art-of-spending-money', title: 'The Art of Spending Money', author: 'Morgan Housel',
+    status: 'finished', fav: true, lang: 'en', color: '#2f6b3a',
+    tags: ['Money', 'Behaviour'],
     summary: [
-      'Frankl, a psychiatrist, survived the Nazi concentration camps and wrote about what kept people going when everything else was taken away. His answer is meaning: a reason to keep going that points beyond yourself.',
-      'The second half introduces logotherapy, his idea that we find meaning through the work we do, the people we love, and the attitude we choose toward suffering we cannot avoid.'
+      'From the author of The Psychology of Money. Where that book was about earning and saving, this one asks the harder question: how do you spend money in a way that actually makes your life better?',
+      'Housel looks at why spending to impress rarely satisfies, how independence is one of the best things money can buy, and why knowing what is enough matters more than having more.'
     ],
-    takeaways: [
-      'Between what happens to you and how you respond, there is a space, and the choice in that space is yours.',
-      'Meaning comes from work, love and attitude, not from chasing happiness directly.',
-      'A clear "why" makes almost any "how" bearable.'
+    ideas: ['Money is most useful as freedom over your time.', 'Spending to be admired usually costs more than it returns.', 'Enough is a number worth knowing.'],
+    snippets: []
+  },
+  {
+    id: 'maidanam', title: 'Maidanam', native: 'మైదానం', author: 'Chalam', nativeAuthor: 'చలం',
+    status: 'finished', fav: true, lang: 'te', color: '#8a3b2a',
+    tags: ['Telugu', 'Novel', 'Classic'],
+    summary: [
+      'Rajeswari, a married woman, walks out of her home and her marriage to live with the man she loves, out in an open field. She tells the story herself, without apology.',
+      'Chalam wrote it in the 1920s and it shook Telugu society. It is still one of the boldest books in the language about a woman\'s freedom and desire.'
     ],
+    ideas: ['Respectability can be its own kind of cage.', 'A story told without apology can still unsettle readers a century later.'],
+    snippets: []
+  },
+  {
+    id: 'brahmaneekam', title: 'Brahmaneekam', native: 'బ్రాహ్మణీకం', author: 'Chalam', nativeAuthor: 'చలం',
+    status: 'finished', fav: true, lang: 'te', color: '#6b4a32',
+    tags: ['Telugu', 'Novel', 'Social critique'],
+    summary: [
+      'Chalam turns on the orthodoxy he was born into. The novel shows how rigid caste custom and the idea of being proper end up crushing the lives of the people, especially the women, living inside it.',
+      'Sharp, angry and very Chalam.'
+    ],
+    ideas: ['Tradition deserves questions, not just obedience.'],
+    snippets: []
+  },
+  {
+    id: 'mahaprasthanam', title: 'Mahaprasthanam', native: 'మహాప్రస్థానం', author: 'Sri Sri', nativeAuthor: 'శ్రీశ్రీ',
+    status: 'finished', fav: true, lang: 'te', color: '#a8342b',
+    tags: ['Telugu', 'Poetry', 'Classic'],
+    summary: [
+      'Sri Sri\'s landmark 1950 collection, the book that changed modern Telugu poetry. The poems speak for workers, the poor and the forgotten, and they broke away from the old classical forms to do it.',
+      'Loud, rhythmic and impossible to read quietly.'
+    ],
+    ideas: ['Poetry can be a call to action.', 'Form should serve the message, not the other way round.'],
+    snippets: []
+  },
+  {
+    id: 'maro-prasthanam', title: 'Maro Prasthanam', native: 'మరో ప్రస్థానం', author: 'Sri Sri', nativeAuthor: 'శ్రీశ్రీ',
+    status: 'finished', fav: true, lang: 'te', color: '#7a2f5a',
+    tags: ['Telugu', 'Poetry'],
+    summary: [
+      'A later collection that picks up where Mahaprasthanam left off. The same revolutionary voice, older and still restless.'
+    ],
+    ideas: ['The second journey is often harder than the first.'],
+    snippets: []
+  },
+  {
+    id: 'siprali', title: 'Siprali', native: 'సిప్రాలి', author: 'Sri Sri', nativeAuthor: 'శ్రీశ్రీ',
+    status: 'finished', fav: true, lang: 'te', color: '#c47a1e',
+    tags: ['Telugu', 'Poetry', 'Wit'],
+    summary: [
+      'Sri Sri at play. The title packs three kinds of verse into one word: Sirisiri Muvvalu, Prasnalu (questions) and Limericks. Short, witty and often quietly savage.'
+    ],
+    ideas: ['Humour is a sharp tool for saying serious things.'],
     snippets: []
   }
 ];
 
 const STATUS = { reading: 'Reading now', finished: 'Finished', next: 'Up next' };
+const FILTERS = { all: () => true, reading: b => b.status === 'reading', fav: b => b.fav, te: b => b.lang === 'te' };
 const view = document.getElementById('view');
 let filter = 'all';
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-function cover(b){ return `<div class="cover" style="background:${esc(b.color)}"><span class="ct">${esc(b.title)}</span><span class="ca">${esc(b.author)}</span></div>`; }
+function cover(b){ return `<div class="cover" style="background:${esc(b.color)}">${b.fav ? '<span class="fav" aria-label="Favourite">Favourite</span>' : ''}<span class="ct">${b.native ? `<span class="te">${esc(b.native)}</span>` : ''}${esc(b.title)}</span><span class="ca">${b.nativeAuthor ? `<span class="te-a">${esc(b.nativeAuthor)}</span> · ` : ''}${esc(b.author)}</span></div>`; }
 
 function shelf(){
-  const list = BOOKS.filter(b => filter === 'all' || b.status === filter);
+  const list = BOOKS.filter(FILTERS[filter] || FILTERS.all);
   const reading = BOOKS.filter(b => b.status === 'reading').length;
   document.getElementById('count').textContent = `${reading} on the go · ${BOOKS.length} on the shelf`;
   const btn = (k, label) => `<button type="button" data-f="${k}" aria-pressed="${filter === k}">${label}</button>`;
@@ -185,9 +251,9 @@ function shelf(){
     <div style="display:grid;gap:0">
       <div class="awning" aria-hidden="true"></div>
       <div class="sign"><small>Platform 1 · bookstall</small><h1>What I am reading</h1>
-      <p>Every journey needs something to read on the train. Tap a book for a short summary, what I took from it, and the code snippets it sparked.</p></div>
+      <p>Every journey needs something to read on the train. Favourites, Telugu classics and what is on the go right now. Tap a book for a short summary, its key ideas, and the code snippets it sparked.</p></div>
     </div>
-    <div class="filters" role="group" aria-label="Filter books">${btn('all','All')}${btn('reading','Reading now')}${btn('finished','Finished')}${btn('next','Up next')}</div>
+    <div class="filters" role="group" aria-label="Filter books">${btn('all','All')}${btn('reading','Reading now')}${btn('fav','Favourites')}${btn('te','Telugu')}</div>
     ${list.length ? `<div class="shelf">${list.map(b => `
       <a class="book" href="#${esc(b.id)}" aria-label="${esc(b.title)} by ${esc(b.author)}">
         ${cover(b)}
@@ -207,13 +273,13 @@ function detail(b){
       <article class="ticket">
         <div class="tk"><span>${STATUS[b.status] || ''}</span><a href="#" style="color:#fff">All books</a></div>
         <div class="bd">
-          <h2>${esc(b.title)}</h2>
-          <div class="by">${esc(b.author)}</div>
+          <h2>${esc(b.title)}</h2>${b.native ? `<div class="native">${esc(b.native)}</div>` : ''}
+          <div class="by">${esc(b.author)}${b.nativeAuthor ? ' · ' + esc(b.nativeAuthor) : ''}</div>
           <div class="tags">${(b.tags || []).map(t => `<span>${esc(t)}</span>`).join('')}</div>
           <h3>In short</h3>
           ${(b.summary || []).map(p => `<p>${esc(p)}</p>`).join('')}
-          <h3>What I took from it</h3>
-          <ul>${(b.takeaways || []).map(t => `<li>${esc(t)}</li>`).join('')}</ul>
+          <h3>Key ideas</h3>
+          <ul>${(b.ideas || []).map(t => `<li>${esc(t)}</li>`).join('')}</ul>
           <h3>Code snippets</h3>
           ${snips}
         </div>
