@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Sainath Reddy: finance and AI translator. A train ride from Puttaparthi to Chennai to remote work.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Sainath's City Line</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Noto+Sans+Telugu:wght@700&family=Noto+Sans+Tamil:wght@700&display=swap">
+<style>
+/* Layout: a sticky stage turns vertical scroll into a train ride across one long illustrated world, then a plain reading section below. */
+:root{
+  --ink:#1b1208;
+  --night:#0b1030;
+  --night-2:#141a44;
+  --paper:#eef0fb;
+  --muted:#a7acd3;
+  --signal:#f5c518;     /* Indian Railways station-board yellow */
+  --neon:#7ef0ff;
+  --violet:#9b8cff;
+  --f-disp:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --f-body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --f-te:"Noto Sans Telugu","Nirmala UI",sans-serif;
+  --f-ta:"Noto Sans Tamil","Nirmala UI",sans-serif;
+  color-scheme:dark;
+}
+html{background:var(--night)}
+body{background:var(--night);color:var(--paper);font-family:var(--f-body);font-size:15px;line-height:1.55}
+*{box-sizing:border-box}
+
+/* ---------- ride ---------- */
+.ride{position:relative}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--night)}
+.sky{position:absolute;inset:0;background:linear-gradient(180deg,var(--sky-t,#f6b47a) 0%,var(--sky-b,#fde3c0) 78%)}
+.stars{position:absolute;left:0;top:0;width:2px;height:2px;border-radius:50%;opacity:var(--stars,0)}
+.sun{position:absolute;width:12vh;height:12vh;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,#fffaf0 0 38%,var(--sun,#ffe7a8) 40%,rgba(255,230,160,0) 70%);pointer-events:none}
+.moon{position:absolute;right:max(14%,80px);top:15%;width:7vh;height:7vh;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fffbea,#d9dcf5 70%);box-shadow:0 0 40px 10px rgba(200,210,255,.25);opacity:var(--moon,0)}
+.layer{position:absolute;left:0;top:0;will-change:transform}
+#world{z-index:2}
+#far{z-index:1}
+
+/* svg text + parts */
+.tag rect{fill:rgba(18,14,8,.82);stroke:rgba(255,255,255,.35);stroke-width:1;transition:fill .2s}
+.tag text{fill:#fff;font:600 12px var(--f-body);letter-spacing:.02em}
+.night .tag rect{fill:rgba(10,14,40,.85);stroke:var(--neon)}
+.lm{cursor:pointer;outline:none}
+.lm:hover .tag rect,.lm:focus-visible .tag rect{fill:#c8342b;stroke:#fff}
+.lm:focus-visible .tag rect{stroke-width:3}
+.lm .ping{fill:none;stroke:#fff;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:ping 2.2s ease-out infinite}
+@keyframes ping{0%{opacity:.9;transform:scale(.4)}100%{opacity:0;transform:scale(1.8)}}
+.b-nat-te{font:700 15px var(--f-te);fill:#111}
+.b-nat-ta{font:700 13px var(--f-ta);fill:#111}
+.b-eng{font:900 20px var(--f-disp);letter-spacing:.06em;fill:#111}
+.b-neon{fill:var(--neon);font:900 20px var(--f-disp);letter-spacing:.08em}
+.b-neon-s{fill:#cfd6ff;font:700 13px var(--f-te)}
+.sign{font:800 11px var(--f-disp);letter-spacing:.12em;fill:#1f3f73}
+.clock-l{font:500 10px var(--f-mono);fill:#cfe9ff;letter-spacing:.08em}
+.beam{animation:beam 4s ease-in-out infinite alternate;transform-box:fill-box}
+@keyframes beam{0%{opacity:.15}100%{opacity:.75}}
+.fiber{stroke-dasharray:6 14;animation:flow 1.6s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-40}}
+.node{animation:pulse 2.4s ease-in-out infinite}
+.dot{animation:blink 1.4s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@keyframes pulse{50%{opacity:.25}}
+.coach-win{fill:#cfe6ff;transition:fill .6s}
+.night .coach-win{fill:#ffd27a}
+.headbeam{opacity:0;transition:opacity .6s}
+.night .headbeam{opacity:.55}
+
+/* overlays */
+.hero{position:absolute;z-index:5;left:max(20px,env(safe-area-inset-left,0px));top:calc(max(18px,env(safe-area-inset-top,0px)) + 2vh);max-width:min(560px,86vw);color:var(--ink);transition:opacity .3s}
+.eyebrow{font:500 11px var(--f-mono);letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+.hero h1{font:900 clamp(44px,9vh,92px)/.86 var(--f-disp);text-transform:uppercase;letter-spacing:.01em;margin:.25em 0 .2em;text-wrap:balance}
+.hero p{font-size:clamp(14px,1.9vh,17px);max-width:46ch;margin:0}
+.hint{margin-top:14px;display:inline-flex;gap:8px;align-items:center;font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border:1.5px solid var(--ink);border-radius:999px}
+.hint i{display:inline-block;width:8px;height:8px;border-right:2px solid;border-bottom:2px solid;transform:rotate(45deg) translateY(-2px);animation:bob 1.4s ease-in-out infinite}
+@keyframes bob{50%{transform:rotate(45deg) translate(3px,1px)}}
+
+.where{position:absolute;z-index:5;right:max(16px,env(safe-area-inset-right,0px));top:calc(max(14px,env(safe-area-inset-top,0px)));text-align:right;padding:8px 12px;border-radius:10px;background:rgba(10,12,30,.55);backdrop-filter:blur(6px);color:#fff}
+.where b{display:block;font:800 20px/1 var(--f-disp);letter-spacing:.08em;text-transform:uppercase}
+.where span{font:500 10px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#d8dcf5}
+
+.hud{position:absolute;z-index:6;left:50%;transform:translateX(-50%);bottom:calc(max(12px,env(safe-area-inset-bottom,0px)));width:min(760px,calc(100% - 24px));background:rgba(9,11,30,.78);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:10px 14px;display:grid;gap:8px;color:#fff}
+.hud-row{display:grid;grid-template-columns:58px 1fr;align-items:center;gap:10px;min-width:0}
+.hud-k{font:500 10px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.hud ol{list-style:none;margin:0;padding:0;display:flex;gap:6px;min-width:0}
+.hud li{flex:1 1 0;min-width:0;font:600 12px/1.2 var(--f-body);padding:6px 8px;border-radius:8px;border:1px dashed rgba(255,255,255,.25);color:#8e93b8;text-align:center;transition:all .35s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nodes li.on{border:1px solid #fff;color:#fff;background:rgba(255,255,255,.08)}
+.nodes li.now{background:#c8342b;border-color:#c8342b;color:#fff}
+.stamps li.on{border:1.5px solid var(--signal);color:#111;background:var(--signal);transform:rotate(-1.5deg)}
+.stamps li.on:nth-child(even){transform:rotate(1.5deg)}
+.stamps li.wip.on{background:transparent;color:var(--signal);border:1.5px dashed var(--signal);transform:none;animation:pulse 1.6s ease-in-out infinite}
+.toast{white-space:nowrap;max-width:calc(100% - 32px);overflow:hidden;text-overflow:ellipsis;position:absolute;z-index:7;left:50%;bottom:calc(max(12px,env(safe-area-inset-bottom,0px)) + 112px);transform:translate(-50%,10px);opacity:0;pointer-events:none;background:var(--signal);color:#111;font:800 15px var(--f-disp);letter-spacing:.1em;text-transform:uppercase;padding:8px 14px;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:all .35s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* panel */
+.panel{position:fixed;z-index:20;right:max(16px,env(safe-area-inset-right,0px));top:calc(max(16px,env(safe-area-inset-top,0px)) + 56px);width:min(380px,calc(100% - 32px));max-height:calc(100% - 200px);overflow:auto;background:#fbf8f1;color:#1b1208;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.45);font-size:14.5px}
+.panel .tk{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:#c8342b;color:#fff;font:500 10.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase}
+.panel .tk button{all:unset;cursor:pointer;font:600 12px var(--f-body);letter-spacing:0;text-transform:none;padding:4px 8px;border:1px solid rgba(255,255,255,.6);border-radius:4px}
+.panel .tk button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.panel .bd{padding:16px 18px 18px;border-top:2px dashed #e0d6c4;display:grid;gap:10px}
+.panel h2{font:900 30px/.95 var(--f-disp);text-transform:uppercase;margin:0;text-wrap:balance}
+.panel .org{font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#7a5a3c}
+.panel p{margin:0}
+.panel ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.panel .stamp{justify-self:start;font:800 13px var(--f-disp);letter-spacing:.12em;text-transform:uppercase;color:#c8342b;border:2px solid #c8342b;padding:4px 10px;border-radius:4px;transform:rotate(-3deg)}
+.panel .mail{font:500 13px var(--f-mono);user-select:all;background:#efe7d8;padding:6px 8px;border-radius:4px;word-break:break-all}
+
+/* ---------- reading section ---------- */
+.after{background:linear-gradient(180deg,var(--night-2),var(--night));padding-block:72px 96px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto;display:grid;gap:48px}
+.after h2{font:900 clamp(36px,6vw,64px)/.9 var(--f-disp);text-transform:uppercase;margin:0;text-wrap:balance}
+.after .lede{color:var(--muted);max-width:60ch;margin:.6em 0 0}
+.about{display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:center}
+.about>*{min-width:0}
+.about img{width:200px;height:200px;max-width:100%;object-fit:cover;border-radius:50%;border:4px solid var(--signal);box-shadow:0 0 0 8px rgba(245,197,24,.12)}
+.about-t{font-size:17px;max-width:58ch;margin:0}
+.cols{display:grid;grid-template-columns:1.25fr 1fr;gap:40px}
+.cols>*{min-width:0}
+.h3{font:500 11px var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--signal);margin:0 0 14px}
+.line{list-style:none;margin:0;padding:0;position:relative}
+.line::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;border-left:3px dotted rgba(255,255,255,.3)}
+.line li{position:relative;padding:0 0 20px 32px}
+.line li::before{content:"";position:absolute;left:0;top:5px;width:17px;height:17px;border-radius:50%;background:var(--night);border:3px solid var(--paper)}
+.line li.city::before{background:var(--signal);border-color:var(--signal);border-radius:3px}
+.line b{display:block;font-weight:600}
+.line small{color:var(--muted);font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase}
+.line li.city b{font:800 20px/1.1 var(--f-disp);letter-spacing:.08em;text-transform:uppercase;color:var(--signal)}
+.skills{display:grid;gap:12px}
+.skill{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:baseline;padding:14px 16px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:rgba(255,255,255,.03)}
+.skill .n{grid-row:span 2;font:900 30px/1 var(--f-disp);color:var(--neon)}
+.skill b{font-weight:600}
+.skill span{color:var(--muted);font-size:13.5px}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tools span{font:500 11.5px var(--f-mono);padding:5px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.2);color:#d9dcf5}
+.contact{display:grid;gap:18px;padding:22px;border:2px solid var(--signal);border-radius:6px}
+.ct-head{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline}
+.ct-sub{color:var(--muted);font-size:14px}
+.ct-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.ct{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:12px 14px;border:1px dashed rgba(255,255,255,.25);border-radius:8px;min-width:0}
+.ct[hidden]{display:none}
+.ct code{font-size:12.5px;overflow-wrap:anywhere}
+.ct-k{flex-basis:100%;font:500 10px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.ct button{padding:4px 10px!important;font-size:12px!important}
+.stall{display:grid;gap:6px;padding:22px 24px;border-radius:6px;background:repeating-linear-gradient(90deg,#c8342b 0 28px,#b02c24 28px 56px);color:#fff;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .2s}
+.stall:hover{transform:translateY(-3px)}
+.stall:focus-visible{outline:3px solid var(--signal);outline-offset:3px}
+.stall-k{font:500 10.5px var(--f-mono);letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.stall-t{font:900 clamp(28px,4.4vw,44px)/.95 var(--f-disp);text-transform:uppercase}
+.stall-s{max-width:56ch}
+.stall-go{justify-self:start;margin-top:6px;background:var(--signal);color:#111;font:800 14px var(--f-disp);letter-spacing:.12em;text-transform:uppercase;padding:7px 12px;border-radius:4px}
+.contact .big{font:900 28px/1 var(--f-disp);text-transform:uppercase;color:var(--signal);letter-spacing:.04em}
+.contact code{font:500 14px var(--f-mono);user-select:all;word-break:break-all}
+.contact a{color:var(--neon)}
+.contact button{font:600 13px var(--f-body);background:var(--signal);color:#111;border:0;border-radius:6px;padding:8px 12px;cursor:pointer}
+.contact button:focus-visible,.contact a:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+@media (max-width:720px){
+  .cols{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr;justify-items:start}
+  .about img{width:140px;height:140px}
+  .hud{padding:8px 10px}
+  .hud-row{grid-template-columns:1fr;gap:4px}
+  .hud li{font-size:10.5px;padding:5px 4px}
+  .where b{font-size:16px}
+  .hero{top:calc(max(18px,env(safe-area-inset-top,0px)) + 64px)}
+  .toast{font-size:12px}
+  .panel{top:auto;bottom:0;right:0;left:0;width:100%;max-height:70%;border-radius:14px 14px 0 0;padding-bottom:env(safe-area-inset-bottom,0px)}
+  .toast{bottom:calc(max(12px,env(safe-area-inset-bottom,0px)) + 130px)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+
+<section class="ride" id="ride" aria-label="Journey from Puttaparthi to Chennai to remote work">
+  <div class="stage" id="stage">
+    <div class="sky" id="sky"></div>
+    <div class="stars" id="stars"></div>
+    <div class="sun" id="sun"></div>
+    <div class="moon" id="moon"></div>
+    <svg class="layer" id="far" viewBox="0 0 3400 600" preserveAspectRatio="none" aria-hidden="true"><path id="farPath" fill="#d38a5a"/></svg>
+    <svg class="layer" id="world" viewBox="0 0 4800 600" preserveAspectRatio="none"></svg>
+
+    <div class="hero" id="hero">
+      <div class="eyebrow">The Translator · Finance × AI</div>
+      <h1>Sainath<br>Reddy</h1>
+      <p>Finance people talk in quotas and accruals. AI people talk in tokens and pipelines. I speak both, plus five human languages. Here is the line that got me here.</p>
+      <div class="hint"><i></i>Scroll to ride</div>
+    </div>
+    <div class="where" aria-live="polite"><b id="zone">Puttaparthi</b><span id="zoneSub">Andhra Pradesh · dawn</span></div>
+
+    <div class="toast" id="toast" role="status"></div>
+    <div class="hud" aria-label="Progress">
+      <div class="hud-row"><span class="hud-k">Career</span>
+        <ol class="nodes" id="career"><li>Language Expert</li><li>Finance Specialist</li><li>Sr. Sales Comp</li></ol></div>
+      <div class="hud-row"><span class="hud-k">Skills</span>
+        <ol class="stamps" id="stamps"><li>Portuguese</li><li>CMA (US)</li><li>Data Sci &amp; ML</li><li class="wip">AI &amp; Fabric · ongoing</li></ol></div>
+    </div>
+  </div>
+</section>
+
+<aside class="panel" id="panel" hidden aria-live="polite">
+  <div class="tk"><span id="pK">Ticket</span><button id="pClose" type="button">Close</button></div>
+  <div class="bd" id="pBody"></div>
+</aside>
+
+<section class="after" id="after">
+  <div class="wrap">
+    <div>
+      <h2>The line so far</h2>
+      <p class="lede">The same journey, minus the train. Three cities, three careers, three skill upgrades with a fourth under construction, and one habit that never changed: making finance work faster, smarter and easier to audit.</p>
+    </div>
+    <div class="about">
+      <img src="portrait.jpg" alt="Portrait of Sainath Reddy" width="420" height="420">
+      <div>
+        <p class="h3">The loco pilot</p>
+        <p class="about-t">Hi, I am Sainath. Senior Sales Compensation Specialist by day, translator between finance and AI the rest of the time. Six plus years across US and LATAM markets, a CMA (US), a data science diploma, and five languages: Telugu, English, Portuguese, Spanish and Tamil.</p>
+      </div>
+    </div>
+    <div class="cols">
+      <div>
+        <p class="h3">Stations</p>
+        <ol class="line">
+          <li class="city"><b>Puttaparthi</b><small>Andhra Pradesh · born and raised</small></li>
+          <li><b>B.Sc. Mathematics, Statistics &amp; Computer Science</b><small>Sri Krishnadevaraya University</small></li>
+          <li><b>Diploma in Portuguese</b><small>Camões</small></li>
+          <li class="city"><b>Chennai</b><small>Tamil Nadu</small></li>
+          <li><b>Portuguese Language Expert</b><small>Accenture</small></li>
+          <li><b>Finance Specialist</b><small>Corteva Agriscience</small></li>
+          <li><b>Pricing &amp; Sales Compensation Analyst</b><small>Lennox</small></li>
+          <li class="city"><b>Remote</b><small>Anywhere with wifi</small></li>
+          <li><b>Senior Sales Compensation Specialist</b><small>Sealed Air · owns the monthly SIP cycle</small></li>
+        </ol>
+      </div>
+      <div>
+        <p class="h3">Skill upgrades</p>
+        <div class="skills">
+          <div class="skill"><span class="n">1</span><b>Portuguese</b><span>Diploma from Camões. The first ticket out, and later the bridge to LATAM.</span></div>
+          <div class="skill"><span class="n">2</span><b>CMA (US)</b><span>Management accounting, planning, controls and decision analysis.</span></div>
+          <div class="skill"><span class="n">3</span><b>Data Science &amp; ML</b><span>PG Diploma, University of Texas at Austin.</span></div>
+          <div class="skill"><span class="n">4</span><b>AI &amp; Microsoft Fabric · ongoing</b><span>Still building: Fabric, semantic modeling, Power BI and AI agents for finance.</span></div>
+        </div>
+        <div class="tools" aria-label="Tools">
+          <span>SAP Commissions</span><span>Python</span><span>VBA</span><span>Power Automate</span><span>Power BI</span><span>Excel automation</span><span>Microsoft Fabric</span>
+        </div>
+      </div>
+    </div>
+    <a class="stall" href="reads.html">
+      <span class="stall-k">Platform bookstall</span>
+      <span class="stall-t">What I am reading</span>
+      <span class="stall-s">Books on the go, short summaries, and soon the code snippets they inspired.</span>
+      <span class="stall-go">Open the bookstall</span>
+    </a>
+    <section class="contact" aria-labelledby="ctT">
+      <div class="ct-head"><span class="big" id="ctT">Next station: Loading...</span><span class="ct-sub">Ticket counter is open. Pick a window.</span></div>
+      <div class="ct-grid">
+        <div class="ct"><span class="ct-k">Email</span><code id="mail">reddysainath286@gmail.com</code><button type="button" id="copyMail">Copy</button></div>
+        <div class="ct" id="phoneRow" hidden><span class="ct-k">Mobile</span><code id="phone"></code><button type="button" id="copyPhone">Copy</button></div>
+        <div class="ct"><span class="ct-k">LinkedIn</span><a href="https://www.linkedin.com/in/sainath-reddy-cma-b32526120" target="_blank" rel="noopener">sainath-reddy-cma</a></div>
+        <div class="ct"><span class="ct-k">GitHub</span><a href="https://github.com/Mountain-sparrow" target="_blank" rel="noopener">Mountain-sparrow</a></div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<script>
+(function(){
+const W=4800, G=455;
+const $=s=>document.getElementById(s);
+const world=$('world'), far=$('far'), ride=$('ride'), stage=$('stage');
+
+/* ---------- helpers ---------- */
+function tag(x,y,t){const w=Math.round(t.length*7+24);return `<g class="tag" transform="translate(${x-w/2},${y})"><rect width="${w}" height="24" rx="12"/><text x="${w/2}" y="16.5" text-anchor="middle">${t}</text></g><circle class="ping" cx="${x}" cy="${y+36}" r="6"/><circle cx="${x}" cy="${y+36}" r="3" fill="#fff"/>`;}
+function lm(id,label,tx,ty,inner){return `<g class="lm" data-id="${id}" tabindex="0" role="button" aria-label="${label}">${inner}${tag(tx,ty,label)}</g>`;}
+function board(x,nat,natCls,eng){return `<g><rect x="${x-78}" y="372" width="6" height="83" fill="#2a2a2a"/><rect x="${x+72}" y="372" width="6" height="83" fill="#2a2a2a"/><rect x="${x-92}" y="342" width="184" height="62" rx="3" fill="#f5c518" stroke="#141414" stroke-width="3"/><text class="${natCls}" x="${x}" y="368" text-anchor="middle">${nat}</text><text class="b-eng" x="${x}" y="394" text-anchor="middle">${eng}</text></g>`;}
+function palm(x,s=1){return `<g transform="translate(${x},${G}) scale(${s})"><path d="M0 0 Q6 -50 2 -96" stroke="#6b4a32" stroke-width="6" fill="none"/><g fill="#3f7a3a"><path d="M2 -96 Q-30 -104 -46 -84 Q-24 -94 2 -92Z"/><path d="M2 -96 Q34 -106 50 -84 Q26 -94 2 -92Z"/><path d="M2 -96 Q-18 -126 -40 -124 Q-14 -114 2 -94Z"/><path d="M2 -96 Q22 -128 44 -122 Q16 -114 2 -94Z"/></g></g>`;}
+function cloud(x,y,s=1){return `<g transform="translate(${x},${y}) scale(${s})" fill="#fff" opacity=".9"><ellipse cx="0" cy="0" rx="46" ry="18"/><ellipse cx="-28" cy="6" rx="30" ry="14"/><ellipse cx="30" cy="6" rx="34" ry="14"/><ellipse cx="6" cy="-12" rx="26" ry="18"/></g>`;}
+
+/* ---------- gopuram ---------- */
+function gopuram(cx){const cols=['#e3a74a','#d9784e','#6ea39a','#e3c06a','#c96a55','#7fb0c9','#e3a74a'];let s='';for(let i=0;i<7;i++){const wb=190-i*22,wt=wb-14,y1=G-i*34,y0=y1-34;s+=`<path d="M${cx-wb/2} ${y1} L${cx-wt/2} ${y0} L${cx+wt/2} ${y0} L${cx+wb/2} ${y1}Z" fill="${cols[i]}"/><rect x="${cx-wt/2-4}" y="${y0-3}" width="${wt+8}" height="5" fill="#f6e7c8"/>`;for(let k=-2;k<=2;k++){if(i<6)s+=`<rect x="${cx+k*(wt/6)-3}" y="${y0+10}" width="6" height="14" fill="rgba(0,0,0,.18)" rx="2"/>`;}}
+const top=G-7*34;s+=`<path d="M${cx-38} ${top} Q${cx} ${top-34} ${cx+38} ${top}Z" fill="#d9784e"/>`;for(let k=-2;k<=2;k++)s+=`<circle cx="${cx+k*14}" cy="${top-22+Math.abs(k)*5}" r="4" fill="#f2cf5b"/>`;s+=`<path d="M${cx-18} ${G} L${cx-18} ${G-30} Q${cx} ${G-44} ${cx+18} ${G-30} L${cx+18} ${G}Z" fill="#5a3324"/>`;return s;}
+
+/* ---------- fabric lattice ---------- */
+function fabric(){let s='<defs><clipPath id="fabClip"><path d="M4270 455 L4320 200 L4410 200 L4460 455Z"/></clipPath></defs><path d="M4270 455 L4320 200 L4410 200 L4460 455Z" fill="rgba(155,140,255,.12)" stroke="#9b8cff" stroke-width="2"/><g clip-path="url(#fabClip)" stroke-width="1.6">';for(let i=-20;i<20;i++){s+=`<line x1="${4200+i*22}" y1="455" x2="${4460+i*22}" y2="195" stroke="#7ef0ff" opacity=".7"/><line x1="${4460+i*22}" y1="455" x2="${4200+i*22}" y2="195" stroke="#9b8cff" opacity=".7"/>`;}s+='</g>';[[4365,230],[4330,300],[4400,300],[4365,370],[4300,420],[4430,420]].forEach(([x,y],i)=>s+=`<circle class="node" style="animation-delay:${i*.3}s" cx="${x}" cy="${y}" r="5" fill="#fff"/>`);
+s+='<g stroke="#f5c518" stroke-width="4" fill="none"><line x1="4500" y1="455" x2="4500" y2="170"/><line x1="4290" y1="176" x2="4560" y2="176"/><line x1="4500" y1="170" x2="4540" y2="176"/></g><line x1="4330" y1="176" x2="4330" y2="196" stroke="#cfd6ff" stroke-width="1.5"/><rect x="4322" y="194" width="16" height="8" fill="#f5c518"/>';return s;}
+
+/* ---------- clocks ---------- */
+const clocks=[{x:4000,y:300,l:'IST',tz:'Asia/Kolkata'},{x:4080,y:242,l:'US',tz:'America/New_York'},{x:4160,y:304,l:'LATAM',tz:'America/Sao_Paulo'}];
+function clockSvg(){return clocks.map((c,i)=>`<g><circle cx="${c.x}" cy="${c.y}" r="27" fill="#1c2350" stroke="#7ef0ff" stroke-width="2.5"/><line id="ch${i}" x1="${c.x}" y1="${c.y}" x2="${c.x}" y2="${c.y-13}" stroke="#fff" stroke-width="3" stroke-linecap="round"/><line id="cm${i}" x1="${c.x}" y1="${c.y}" x2="${c.x}" y2="${c.y-20}" stroke="#7ef0ff" stroke-width="2" stroke-linecap="round"/><text class="clock-l" x="${c.x}" y="${c.y+44}" text-anchor="middle">${c.l}</text></g>`).join('');}
+function setClocks(){const now=new Date();clocks.forEach((c,i)=>{let h=0,m=0;try{const parts=new Intl.DateTimeFormat('en-US',{timeZone:c.tz,hour:'numeric',minute:'numeric',hour12:false}).formatToParts(now);h=+parts.find(p=>p.type==='hour').value%24;m=+parts.find(p=>p.type==='minute').value;}catch(e){}const ha=((h%12)+m/60)/12*2*Math.PI,ma=m/60*2*Math.PI;const H=$('ch'+i),M=$('cm'+i);H.setAttribute('x2',c.x+Math.sin(ha)*13);H.setAttribute('y2',c.y-Math.cos(ha)*13);M.setAttribute('x2',c.x+Math.sin(ma)*20);M.setAttribute('y2',c.y-Math.cos(ma)*20);});}
+
+/* ---------- train ---------- */
+const wheelX=[-216,-190,-146,-124,-92,-70,-38,-18];
+function train(){let s='<g id="train">';s+='<polygon class="headbeam" points="0,428 260,404 260,470" fill="url(#beamG)"/>';
+s+='<rect x="-232" y="416" width="122" height="54" rx="7" fill="#2b5aa6"/><rect x="-232" y="447" width="122" height="5" fill="#f1e3b8"/>';for(let i=0;i<5;i++)s+=`<rect class="coach-win" x="${-224+i*23}" y="424" width="16" height="16" rx="2"/>`;
+s+='<rect x="-112" y="455" width="10" height="5" fill="#333"/><rect x="-104" y="408" width="94" height="62" rx="7" fill="#c8342b"/><rect x="-104" y="449" width="94" height="6" fill="#f1e3b8"/><path d="M-12 408 L2 426 L2 470 L-12 470Z" fill="#a82a22"/><rect x="-52" y="412" width="38" height="30" rx="3" class="coach-win"/><clipPath id="cab"><rect x="-52" y="412" width="38" height="30" rx="3"/></clipPath><g clip-path="url(#cab)" id="pilot"><path d="M-46 442 Q-34 430 -20 442Z" fill="#141414"/><rect x="-37" y="430" width="6" height="6" fill="#c68a5e"/><ellipse cx="-33" cy="425" rx="7" ry="8" fill="#c68a5e"/><g fill="#141414"><circle cx="-40" cy="421" r="3.2"/><circle cx="-26" cy="421" r="3.2"/><circle cx="-39" cy="417" r="3"/><circle cx="-27" cy="417" r="3"/></g><path d="M-40 426 Q-40 436 -33 436 Q-26 436 -26 426 Q-29 430 -33 430 Q-37 430 -40 426Z" fill="#141414"/><path d="M-36 431.5 Q-33 433.5 -30 431.5" stroke="#f4e7dc" stroke-width="1.2" fill="none"/><circle cx="-30" cy="424" r="1.1" fill="#141414"/><circle cx="-36" cy="424" r="1.1" fill="#141414"/><path d="M-42 418 Q-33 409 -24 418Z" fill="#1d2f6b"/><rect x="-43" y="417" width="21" height="3" fill="#1d2f6b"/><rect x="-35" y="414" width="4" height="3" fill="#f5c518"/></g><text x="-171" y="463" text-anchor="middle" style="font:800 8px var(--f-disp);letter-spacing:.2em;fill:#2b5aa6">SAI EXPRESS</text><rect x="-96" y="416" width="40" height="10" rx="2" fill="#8e221b"/><circle cx="-2" cy="436" r="4" fill="#ffe68a"/><rect x="-80" y="400" width="30" height="8" fill="#555"/>';
+wheelX.forEach((x,i)=>s+=`<g class="wh" data-x="${x}"><circle cx="${x}" cy="472" r="9" fill="#1d1d1d"/><line x1="${x-8}" y1="472" x2="${x+8}" y2="472" stroke="#888" stroke-width="2"/><line x1="${x}" y1="464" x2="${x}" y2="480" stroke="#888" stroke-width="2"/></g>`);return s+'</g>';}
+
+/* ---------- build world ---------- */
+let svg=`<defs>
+<linearGradient id="groundG" x1="0" x2="4800" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#b5552f"/><stop offset=".3" stop-color="#b5552f"/><stop offset=".36" stop-color="#9c907f"/><stop offset=".56" stop-color="#9c907f"/><stop offset=".58" stop-color="#e4cd98"/><stop offset=".69" stop-color="#e4cd98"/><stop offset=".74" stop-color="#151b40"/><stop offset="1" stop-color="#0d1230"/></linearGradient>
+<linearGradient id="railG" x1="0" x2="4800" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3b3b3b"/><stop offset=".7" stop-color="#4a4a4a"/><stop offset=".76" stop-color="#7ef0ff"/><stop offset="1" stop-color="#9b8cff"/></linearGradient>
+<linearGradient id="ballastG" x1="0" x2="4800" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5c4d44"/><stop offset=".7" stop-color="#5c5550"/><stop offset=".76" stop-color="#1b2150"/><stop offset="1" stop-color="#151a44"/></linearGradient>
+<linearGradient id="beamG" x1="0" x2="1"><stop offset="0" stop-color="#ffe68a" stop-opacity=".9"/><stop offset="1" stop-color="#ffe68a" stop-opacity="0"/></linearGradient>
+<linearGradient id="lhG" x1="0" x2="1"><stop offset="0" stop-color="#fff3b0" stop-opacity=".8"/><stop offset="1" stop-color="#fff3b0" stop-opacity="0"/></linearGradient>
+<pattern id="az" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#f7faff"/><path d="M7 1 L13 7 L7 13 L1 7Z" fill="none" stroke="#2f5fa7" stroke-width="1.4"/><circle cx="7" cy="7" r="2" fill="#2f5fa7"/></pattern>
+<pattern id="win" width="12" height="15" patternUnits="userSpaceOnUse"><rect width="12" height="15" fill="#e7e2d7"/><rect x="2" y="3" width="8" height="9" fill="#7f97ad"/></pattern>
+<pattern id="glass" width="18" height="16" patternUnits="userSpaceOnUse"><rect width="18" height="16" fill="#35546f"/><rect x="2" y="2" width="14" height="12" fill="#5d86a8"/><path d="M3 13 L12 3" stroke="#a9cbe6" stroke-width="1.5"/></pattern>
+<pattern id="sleep" width="22" height="8" patternUnits="userSpaceOnUse"><rect x="2" width="12" height="8" fill="#3a2e28"/></pattern>
+</defs>`;
+
+/* sky details */
+svg+=cloud(560,120)+cloud(1320,86,.8)+cloud(2080,110,1.1)+cloud(2660,70,.7);
+svg+='<g stroke="#3a2a1a" stroke-width="2" fill="none"><path d="M220 150 q8 -8 16 0 q8 -8 16 0"/><path d="M270 130 q6 -6 12 0 q6 -6 12 0"/><path d="M860 170 q7 -7 14 0 q7 -7 14 0"/></g>';
+/* remote sky: satellite */
+svg+='<g transform="translate(3860,120)"><rect x="-8" y="-6" width="16" height="12" fill="#cfd6ff"/><rect x="-34" y="-4" width="22" height="8" fill="#5d86a8"/><rect x="12" y="-4" width="22" height="8" fill="#5d86a8"/><circle cx="0" cy="10" r="2" fill="#7ef0ff" class="node"/></g>';
+
+/* ground */
+svg+=`<rect x="0" y="${G}" width="${W}" height="${600-G}" fill="url(#groundG)"/>`;
+svg+='<rect x="2760" y="514" width="620" height="86" fill="#2f86b8"/><path d="M2760 520 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" stroke="#e8f6ff" stroke-width="3" fill="none"/>';
+svg+='<g fill="none" stroke-width="2"><path class="fiber" d="M3500 530 H4800" stroke="#7ef0ff"/><path class="fiber" d="M3560 556 H4800" stroke="#9b8cff" style="animation-delay:.5s"/></g>';
+
+/* ---- Puttaparthi ---- */
+svg+='<path d="M-10 455 Q20 372 76 366 Q126 360 146 404 Q166 384 196 394 Q236 410 262 455Z" fill="#8c6a55"/><ellipse cx="96" cy="372" rx="30" ry="20" fill="#9d7b63"/><ellipse cx="190" cy="392" rx="22" ry="14" fill="#7c5d4a"/><ellipse cx="60" cy="400" rx="18" ry="12" fill="#a8866d"/>';
+let ash='<rect x="300" y="432" width="340" height="23" fill="#ead9c3"/><rect x="335" y="340" width="270" height="92" fill="#f3b3c0"/><rect x="331" y="332" width="278" height="10" fill="#fbe7ea"/>';
+for(let i=0;i<8;i++)ash+=`<rect x="${350+i*34}" y="352" width="10" height="80" fill="#fff6f0"/>`;
+ash+='<rect x="436" y="296" width="68" height="40" fill="#9cc7e6"/><path d="M428 298 Q470 224 512 298Z" fill="#f2cf5b"/><line x1="470" y1="252" x2="470" y2="230" stroke="#c99a2e" stroke-width="3"/>';
+[368,572].forEach(x=>ash+=`<rect x="${x-18}" y="312" width="36" height="22" fill="#9cc7e6"/><path d="M${x-22} 314 Q${x} 280 ${x+22} 314Z" fill="#f2cf5b"/>`);
+svg+='<g><rect x="196" y="300" width="14" height="182" fill="#e9d7c1"/><rect x="290" y="300" width="14" height="182" fill="#e9d7c1"/><path d="M188 304 Q250 236 312 304 L304 312 Q250 252 196 312Z" fill="#c8342b"/><rect x="206" y="276" width="88" height="24" rx="3" fill="#f5c518" stroke="#141414" stroke-width="2"/><text x="250" y="294" text-anchor="middle" class="b-nat-te" style="font-size:13px">స్వాగతం</text><path d="M210 312 Q250 330 290 312" stroke="#3f7a3a" stroke-width="3" fill="none"/>'+[0,1,2,3,4,5,6].map(i=>`<path d="M${216+i*11} ${316+Math.sin(i/6*Math.PI)*9} l3 10 l3 -10Z" fill="#4e9a3a"/>`).join('')+'</g>';
+svg+=lm('roots','Where it started · B.Sc.',470,186,ash);
+svg+='<rect x="664" y="444" width="200" height="12" fill="#8a8580"/>'+board(764,'పుట్టపర్తి','b-nat-te','PUTTAPARTHI');
+svg+='<g transform="translate(540,0)"><rect x="692" y="378" width="16" height="77" fill="#6b4a32"/><g fill="#4e7a3a"><circle cx="676" cy="372" r="34"/><circle cx="724" cy="362" r="38"/><circle cx="700" cy="334" r="32"/></g><g stroke="#6b4a32" stroke-width="2"><line x1="664" y1="392" x2="664" y2="455"/><line x1="738" y1="392" x2="738" y2="455"/></g></g>';
+let az='<rect x="830" y="350" width="175" height="105" fill="url(#az)"/><path d="M818 353 L917 300 L1017 353Z" fill="#c4613d"/><rect x="884" y="356" width="66" height="14" fill="#fff"/><text class="sign" x="917" y="367" text-anchor="middle">OLÁ!</text><path d="M896 455 L896 412 Q917 390 938 412 L938 455Z" fill="#1f3f73"/><rect x="848" y="380" width="28" height="26" fill="#fff" stroke="#2f5fa7" stroke-width="2"/><rect x="958" y="380" width="28" height="26" fill="#fff" stroke="#2f5fa7" stroke-width="2"/>';
+svg+='<g transform="translate(80,0)">'+lm('portuguese','Portuguese · Camões',917,250,az)+'</g>';
+
+svg+=palm(1420)+palm(1470,.8)+palm(1560,1.1);
+svg+='<g stroke="#4a4a4a" stroke-width="3"><line x1="1300" y1="455" x2="1300" y2="330"/><line x1="1286" y1="340" x2="1314" y2="340"/><line x1="1640" y1="455" x2="1640" y2="330"/><line x1="1626" y1="340" x2="1654" y2="340"/></g><path d="M1300 342 Q1470 370 1640 342" stroke="#4a4a4a" stroke-width="1.2" fill="none"/>';
+
+/* ---- Chennai ---- */
+svg+='<rect x="1690" y="444" width="140" height="12" fill="#8a8580"/>'+board(1760,'சென்னை சென்ட்ரல்','b-nat-ta','CHENNAI');
+let cc='<rect x="1860" y="350" width="380" height="105" fill="#b4452f"/><rect x="1856" y="344" width="388" height="8" fill="#f1e6d6"/><rect x="2020" y="232" width="60" height="118" fill="#b4452f"/><rect x="2016" y="228" width="68" height="7" fill="#f1e6d6"/><path d="M2014 230 L2050 172 L2086 230Z" fill="#8f3322"/><circle cx="2050" cy="266" r="16" fill="#fbf6ec" stroke="#f1e6d6" stroke-width="3"/><line x1="2050" y1="266" x2="2050" y2="256" stroke="#222" stroke-width="2"/><line x1="2050" y1="266" x2="2057" y2="266" stroke="#222" stroke-width="2"/>';
+[1860,2222].forEach(x=>cc+=`<rect x="${x}" y="312" width="18" height="143" fill="#b4452f"/><path d="M${x-3} 314 Q${x+9} 290 ${x+21} 314Z" fill="#8f3322"/>`);
+for(let r=0;r<2;r++)for(let i=0;i<12;i++){const x=1886+i*28;if(x>2006&&x<2090)continue;cc+=`<path d="M${x} ${404+r*-42} v-18 q7 -9 14 0 v18Z" fill="#f1e6d6"/>`;}
+svg+=lm('accenture','Language Expert · Accenture',2050,128,cc);
+svg+=lm('corteva','Finance Specialist · Corteva',2370,140,'<rect x="2314" y="182" width="112" height="10" fill="#d8d2c6"/><rect x="2320" y="190" width="100" height="265" fill="url(#win)"/>');
+svg+=lm('cma','CMA (US)',2590,160,gopuram(2590));
+svg+=`<g transform="translate(2700,430)"><path d="M0 26 L0 6 Q4 -6 22 -6 L44 -6 L48 26Z" fill="#f1c232"/><path d="M2 2 Q8 -14 26 -14 L44 -14 L44 -6 L4 -6Z" fill="#1f1f1f"/><circle cx="8" cy="28" r="6" fill="#222"/><circle cx="40" cy="28" r="6" fill="#222"/></g>`;
+let lh='<polygon class="beam" points="2905,194 3260,150 3260,250" fill="url(#lhG)"/><path d="M2880 455 L2889 215 L2921 215 L2930 455Z" fill="#ecebe6"/><rect x="2884" y="300" width="42" height="14" fill="#c2402f"/><rect x="2882" y="380" width="46" height="14" fill="#c2402f"/><rect x="2878" y="207" width="54" height="8" fill="#333"/><rect x="2891" y="182" width="28" height="25" fill="#ffe28a"/><path d="M2886 182 L2905 164 L2924 182Z" fill="#c2402f"/>';
+svg+=lm('dsml','Data Science & ML',2905,116,lh);
+svg+=lm('lennox','Pricing & Sales Comp · Lennox',3185,236,'<rect x="3110" y="300" width="150" height="155" fill="url(#glass)"/><rect x="3104" y="294" width="162" height="8" fill="#26394d"/><rect x="3136" y="276" width="44" height="18" fill="#cfd6dc"/><circle cx="3158" cy="285" r="6" fill="none" stroke="#7a8691" stroke-width="2"/><rect x="3196" y="282" width="30" height="12" fill="#cfd6dc"/>');
+
+/* ---- Remote ---- */
+svg+=`<g><rect x="3442" y="372" width="6" height="83" fill="#2a2f5c"/><rect x="3592" y="372" width="6" height="83" fill="#2a2f5c"/><rect x="3428" y="342" width="184" height="62" rx="4" fill="#10163a" stroke="#7ef0ff" stroke-width="2.5"/><text class="b-neon-s" x="3520" y="366" text-anchor="middle">ఎక్కడైనా</text><text class="b-neon" x="3520" y="393" text-anchor="middle">REMOTE</text></g>`;
+let home='<rect x="3640" y="345" width="220" height="110" fill="#283063"/><path d="M3624 348 L3750 284 L3876 348Z" fill="#1b214b"/><rect x="3680" y="368" width="140" height="64" fill="#ffcf73"/><rect x="3700" y="413" width="100" height="5" fill="#5a3e2a"/><rect x="3730" y="388" width="42" height="25" rx="2" fill="#1b1f3a"/><rect x="3733" y="391" width="36" height="19" fill="#7ef0ff"/><g fill="#1b1f3a"><rect x="3737" y="402" width="5" height="6"/><rect x="3745" y="398" width="5" height="10"/><rect x="3753" y="395" width="5" height="13"/><rect x="3761" y="393" width="5" height="15"/></g><rect x="3724" y="413" width="54" height="3" fill="#cfd6ff"/><circle cx="3806" cy="404" r="9" fill="#3f7a3a"/><rect x="3802" y="410" width="8" height="8" fill="#a0522d"/><g fill="none" stroke="#7ef0ff" stroke-width="3" stroke-linecap="round"><path d="M3736 268 q14 -12 28 0"/><path d="M3728 258 q22 -20 44 0" opacity=".7"/><path d="M3720 248 q30 -28 60 0" opacity=".45"/></g>';
+svg+=lm('sealedair','Sr. Sales Comp · Sealed Air',3750,196,home);
+svg+=lm('markets','US & LATAM',4080,170,clockSvg());
+svg+=lm('fabric','AI & Fabric · ongoing',4370,124,fabric());
+svg+=lm('next','Next station',4660,300,'<rect x="4590" y="372" width="6" height="83" fill="#2a2f5c"/><rect x="4724" y="372" width="6" height="83" fill="#2a2f5c"/><rect x="4570" y="342" width="180" height="62" rx="4" fill="#f5c518" stroke="#141414" stroke-width="3"/><text x="4660" y="366" text-anchor="middle" style="font:500 10px var(--f-mono);letter-spacing:.14em;fill:#111">NEXT STATION</text><text class="b-eng" x="4660" y="393" text-anchor="middle" style="font-size:19px">LOADING<tspan class="dot">.</tspan><tspan class="dot" style="animation-delay:.3s">.</tspan><tspan class="dot" style="animation-delay:.6s">.</tspan></text>');
+
+/* track */
+svg+=`<rect x="0" y="482" width="${W}" height="22" fill="url(#ballastG)"/><rect x="0" y="482" width="${W}" height="8" fill="url(#sleep)" opacity=".9"/><rect x="0" y="477" width="${W}" height="5" fill="url(#railG)"/>`;
+svg+='<g class="lm" data-id="pilot" tabindex="0" role="button" aria-label="Loco pilot: Sainath">'+train()+'</g>';
+world.innerHTML=svg;
+setClocks();setInterval(setClocks,30000);
+
+/* far hills */
+(function(){let d='M0 600 L0 400 ';for(let x=0;x<=3400;x+=40){const y=360+Math.sin(x/180)*28+Math.sin(x/67)*12+Math.sin(x/431)*30;d+=`L${x} ${y.toFixed(1)} `;}d+='L3400 600Z';$('farPath').setAttribute('d',d);})();
+
+/* stars */
+(function(){let s=[];let seed=7;const r=()=>(seed=(seed*9301+49297)%233280)/233280;for(let i=0;i<120;i++)s.push(`${(r()*100).toFixed(1)}vw ${(r()*55).toFixed(1)}vh 0 ${r()>.85?1:0}px rgba(255,255,255,${(.4+r()*.6).toFixed(2)})`);$('stars').style.boxShadow=s.join(',');$('stars').style.background='transparent';})();
+
+/* ---------- content ---------- */
+const D={
+ pilot:{k:'Loco pilot',t:'Sainath, driving',o:'Sai Express · all stations',b:['<p>The guy in the cab is me. Same curls, same beard, slightly more official cap. Indian Railways calls its drivers loco pilots, so technically this is a pilot job.</p>']},
+ roots:{k:'Puttaparthi · Andhra Pradesh',t:'Where it started',o:'Born here · studied here till graduation',b:['<p>Born in Puttaparthi and studied here all the way to graduation. Honestly, it felt a bit boring at the start. Turns out that was just the plot loading.</p>','<ul><li>B.Sc. in Mathematics, Statistics and Computer Science, Sri Krishnadevaraya University</li><li>Learned early that numbers tell stories, if you ask them nicely</li></ul>']},
+ portuguese:{k:'Puttaparthi · skill upgrade 1',t:'Portuguese',o:'Diploma in Portuguese · Camões',b:['<p>Picked up Portuguese properly, with a diploma to prove it. It became my first ticket out of town, and later the bridge to LATAM markets.</p>','<ul><li>Five languages: Telugu, English, Portuguese, Spanish, Tamil</li></ul>'],s:'Skill stamped'},
+ accenture:{k:'Chennai · career 1',t:'Portuguese Language Expert',o:'Accenture',b:['<p>First stop in Chennai. Portuguese every day at work, and my first close look at finance operations from the inside.</p>']},
+ corteva:{k:'Chennai · career 2',t:'Finance Specialist',o:'Corteva Agriscience',b:['<p>The switch from words to numbers. Pricing and financial operations for US and LATAM markets, where knowing the language and the ledger both paid off.</p>']},
+ cma:{k:'Chennai · skill upgrade 2',t:'CMA (US)',o:'Certified Management Accountant',b:['<p>Two exam parts and many weekends. Planning, budgeting, controls, cost management and decision analysis.</p>','<p>A gopuram felt right for this one: you climb it one tier at a time.</p>'],s:'Skill stamped'},
+ dsml:{k:'Chennai · skill upgrade 3',t:'Data Science & ML',o:'PG Diploma · UT Austin',b:['<p>Learning to see further out to sea. Python, statistics and machine learning, pointed at one goal: finance work that is faster, smarter and easier to audit.</p>'],s:'Skill stamped'},
+ lennox:{k:'Chennai · on the way to comp',t:'Pricing & Sales Compensation Analyst',o:'Lennox',b:['<p>Pricing, sales compensation and reporting. Fitting that an HVAC company is where I learned to keep things cool at month end.</p>']},
+ sealedair:{k:'Remote · career 3',t:'Senior Sales Compensation Specialist',o:'Sealed Air · fully remote',b:['<p>I own the monthly SIP (Sales Incentive Plan) cycle end to end, working with Sales, Finance and HR so reps get paid right and on time.</p>','<ul><li>SAP Commissions (Callidus), SAP GUI scripting</li><li>Python, VBA, Power Automate Desktop, Excel automation</li><li>Power BI</li></ul>']},
+ markets:{k:'Remote · three time zones',t:'US & LATAM, one desk',o:'6+ years across markets',b:['<p>Pricing, sales comp and financial operations across US and LATAM. The clocks here show the real time right now in Chennai, the US East Coast and São Paulo.</p>']},
+ fabric:{k:'Remote · ongoing project',t:'AI & Microsoft Fabric',o:'Ongoing · not finished yet',b:['<p>The current build, scaffolding still up and the crane still swinging. Microsoft Fabric, semantic modeling, Power BI, and AI agents that take the grunt work out of finance.</p>'],s:'Under construction'},
+ next:{k:'Next station',t:'Loading...',o:'The line keeps going',b:['<p>Same as Puttaparthi: the plot is still loading. AI and Microsoft Fabric are on the tracks, and the next platform is wherever finance needs a translator for AI. Want to ride along? Say hello.</p>','<div class="mail">reddysainath286@gmail.com</div>']}
+};
+const panel=$('panel'),pBody=$('pBody');let lastFocus=null;
+function openP(id){const d=D[id];if(!d)return;lastFocus=document.activeElement;$('pK').textContent=d.k;pBody.innerHTML=`<h2>${d.t}</h2><div class="org">${d.o}</div>${d.b.join('')}${d.s?`<span class="stamp">${d.s}</span>`:''}`;panel.hidden=false;$('pClose').focus();}
+function closeP(){panel.hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();}
+world.addEventListener('click',e=>{const g=e.target.closest('.lm');if(g)openP(g.dataset.id);});
+world.addEventListener('keydown',e=>{const g=e.target.closest('.lm');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openP(g.dataset.id);}});
+$('pClose').addEventListener('click',closeP);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)closeP();});
+const PHONE=''; /* add mobile number here, e.g. '+91 98xxxxxxx' */
+if(PHONE){$('phone').textContent=PHONE;$('phoneRow').hidden=false;$('copyPhone').addEventListener('click',()=>{try{navigator.clipboard.writeText(PHONE).then(()=>{$('copyPhone').textContent='Copied';setTimeout(()=>$('copyPhone').textContent='Copy',1600);},()=>{});}catch(e){}});}
+$('copyMail').addEventListener('click',()=>{const t='reddysainath286@gmail.com',b=$('copyMail');const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600);};try{navigator.clipboard.writeText(t).then(done,()=>{sel();});}catch(e){sel();}function sel(){const r=document.createRange();r.selectNodeContents($('mail'));const s=getSelection();s.removeAllRanges();s.addRange(r);}});
+
+/* ---------- sky keys ---------- */
+const keys=[{q:0,t:'#f3a56c',b:'#fde0bb',f:'#d38a5a',s:'#ffe7a8'},{q:.2,t:'#f7c99a',b:'#fdf0dc',f:'#c99a78',s:'#fff3c4'},{q:.3,t:'#6fb8e6',b:'#d3eefa',f:'#8db3c4',s:'#fffbe8'},{q:.55,t:'#79bde6',b:'#e3f1f4',f:'#93b6c0',s:'#fffbe8'},{q:.66,t:'#e5774f',b:'#f8c27c',f:'#b86a4f',s:'#ffd38a'},{q:.75,t:'#232a5c',b:'#4b437e',f:'#2b2d5a',s:'#ffd38a'},{q:.86,t:'#060a1d',b:'#161d44',f:'#11163a',s:'#ffd38a'},{q:1,t:'#060a1d',b:'#161d44',f:'#11163a',s:'#ffd38a'}];
+const hx=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+const mix=(a,b,t)=>{const A=hx(a),B=hx(b);return 'rgb('+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(',')+')';};
+const ss=(a,b,x)=>{const t=Math.min(1,Math.max(0,(x-a)/(b-a)));return t*t*(3-2*t);};
+function skyAt(q){let i=0;while(i<keys.length-2&&q>keys[i+1].q)i++;const A=keys[i],B=keys[i+1],t=Math.min(1,Math.max(0,(q-A.q)/(B.q-A.q)));return{t:mix(A.t,B.t,t),b:mix(A.b,B.b,t),f:mix(A.f,B.f,t),s:mix(A.s,B.s,t)};}
+
+const zones=[{x:0,n:'Puttaparthi',s:'Andhra Pradesh · dawn'},{x:1660,n:'Chennai',s:'Tamil Nadu · by the sea'},{x:3420,n:'Remote',s:'Anywhere with wifi · night shift'}];
+const careerX=[1880,2330,3660],stampX=[960,2540,2890,4320],stampN=['Portuguese','CMA (US)','Data Science & ML','AI & Microsoft Fabric'];
+const careerLi=[...$('career').children],stampLi=[...$('stamps').children];
+const wheels=[...world.querySelectorAll('.wh')],trainG=$('train');
+let vw=0,vh=0,scale=1,travel=0,nose=0,lastNose=-1,stampState=stampX.map(()=>false),first=true,toastT;
+
+function layout(){vw=stage.clientWidth;vh=stage.clientHeight;scale=vh/600;const wp=W*scale;world.setAttribute('width',wp);world.setAttribute('height',vh);far.setAttribute('width',3400*scale);far.setAttribute('height',vh);travel=Math.max(0,wp-vw);ride.style.height=(travel+vh)+'px';nose=Math.min(vw*.6,vw-16);update();}
+function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),1700);}
+function update(){
+  const top=ride.getBoundingClientRect().top;const p=travel?Math.min(1,Math.max(0,-top/travel)):0;const t=p*travel;
+  world.style.transform=`translate3d(${-t}px,0,0)`;far.style.transform=`translate3d(${-t*.35}px,0,0)`;
+  const nx=(t+nose)/scale;trainG.setAttribute('transform',`translate(${nx.toFixed(1)},0)`);
+  const ang=(nx*3)%360;wheels.forEach(w=>{const x=+w.dataset.x;w.setAttribute('transform',`rotate(${ang.toFixed(1)} ${x} 472)`);});
+  const q=nx/W,c=skyAt(q),st=stage.style;
+  st.setProperty('--sky-t',c.t);st.setProperty('--sky-b',c.b);st.setProperty('--sun',c.s);$('farPath').setAttribute('fill',c.f);
+  st.setProperty('--stars',ss(.7,.86,q).toFixed(2));st.setProperty('--moon',ss(.72,.82,q).toFixed(2));
+  const sq=Math.min(1,q/.72),sun=$('sun');sun.style.left=(8+sq*74)+'%';sun.style.top=(46-Math.sin(sq*Math.PI)*34)+'%';sun.style.opacity=(1-ss(.66,.74,q)).toFixed(2);
+  world.classList.toggle('night',q>.72);
+  $('hero').style.opacity=Math.max(0,1-p*14).toFixed(2);$('hero').style.pointerEvents=p>.06?'none':'';
+  let z=zones[0];zones.forEach(Z=>{if(nx>=Z.x)z=Z;});if($('zone').textContent!==z.n){$('zone').textContent=z.n;$('zoneSub').textContent=z.s;}
+  let cur=-1;careerX.forEach((x,i)=>{if(nx>=x)cur=i;});careerLi.forEach((li,i)=>{li.classList.toggle('on',i<=cur);li.classList.toggle('now',i===cur);});
+  stampX.forEach((x,i)=>{const on=nx>=x;stampLi[i].classList.toggle('on',on);if(on&&!stampState[i]&&!first&&nx>lastNose)toast((i===3?'Now building: ':'Skill upgraded: ')+stampN[i]);stampState[i]=on;});
+  lastNose=nx;first=false;
+}
+let raf=0;addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;update();});},{passive:true});
+addEventListener('resize',layout);
+layout();
+})();
+</script>
+
+</body>
+</html>

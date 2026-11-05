@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Platform Bookstall</title>
+<meta name="description" content="What Sainath Reddy is reading: book cards, short summaries and the code snippets they inspired.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a station bookstall. Shelf of cover cards, then one book open as a ticket-style detail view (routed by #book-id). */
+:root{
+  --night:#0b1030;
+  --night-2:#141a44;
+  --paper:#eef0fb;
+  --muted:#a7acd3;
+  --signal:#f5c518;
+  --rail:#c8342b;
+  --neon:#7ef0ff;
+  --card:#fbf8f1;
+  --card-ink:#1b1208;
+  --f-disp:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --f-body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--night)}
+body{margin:0;background:linear-gradient(180deg,var(--night-2),var(--night) 60%);color:var(--paper);font:15px/1.55 var(--f-body);min-height:100vh;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:1040px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:32px}
+a{color:var(--neon)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.back{font:500 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--paper);text-decoration:none;border:1.5px solid rgba(255,255,255,.4);padding:7px 12px;border-radius:999px}
+.back:hover{border-color:var(--signal);color:var(--signal)}
+
+.awning{height:18px;background:repeating-linear-gradient(90deg,var(--rail) 0 30px,#f1e3b8 30px 60px);border-radius:4px 4px 0 0}
+.sign{background:var(--signal);color:#111;border:3px solid #141414;border-radius:4px;padding:16px 20px;display:grid;gap:4px}
+.sign small{font:500 10.5px var(--f-mono);letter-spacing:.18em;text-transform:uppercase}
+.sign h1{margin:0;font:900 clamp(40px,8vw,84px)/.88 var(--f-disp);text-transform:uppercase;text-wrap:balance}
+.sign p{margin:6px 0 0;max-width:60ch}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:600 13px var(--f-body);color:var(--paper);background:transparent;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 14px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--paper);color:var(--night)}
+
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:22px;padding-bottom:18px;border-bottom:10px solid #5a3e2a;box-shadow:0 12px 0 -4px #3d2a1c}
+.book{all:unset;cursor:pointer;display:grid;grid-template-rows:auto auto;gap:10px;min-width:0}
+.cover{position:relative;aspect-ratio:2/3;max-width:100%;border-radius:3px 8px 8px 3px;padding:18px 16px 16px 22px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;box-shadow:inset 8px 0 0 rgba(0,0,0,.22),0 10px 24px rgba(0,0,0,.4);transition:transform .25s,box-shadow .25s;overflow:hidden}
+.cover::after{content:"";position:absolute;inset:auto -30% -30% auto;width:80%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.08)}
+.book:hover .cover,.book:focus-visible .cover{transform:translateY(-6px) rotate(-1deg);box-shadow:inset 8px 0 0 rgba(0,0,0,.22),0 18px 30px rgba(0,0,0,.5)}
+.book:focus-visible .cover{outline:3px solid var(--signal);outline-offset:3px}
+.cover .ct{font:900 26px/.95 var(--f-disp);text-transform:uppercase;text-wrap:balance;position:relative;z-index:1}
+.cover .ca{font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;opacity:.9;position:relative;z-index:1}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.meta b{font-weight:600;font-size:14px;line-height:1.25;min-width:0}
+.pill{flex:none;font:500 10px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid currentColor}
+.s-reading{color:var(--signal)}
+.s-finished{color:#9be59b}
+.s-next{color:var(--muted)}
+
+.empty{padding:28px;border:1px dashed rgba(255,255,255,.3);border-radius:8px;color:var(--muted)}
+
+/* detail */
+.detail{display:grid;grid-template-columns:240px 1fr;gap:32px;align-items:start}
+.detail>*{min-width:0}
+.detail .cover{width:240px}
+.ticket{background:var(--card);color:var(--card-ink);border-radius:6px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.ticket .tk{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--rail);color:#fff;padding:10px 18px;font:500 10.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase}
+.ticket .bd{padding:20px 22px 24px;border-top:2px dashed #e0d6c4;display:grid;gap:14px}
+.ticket h2{margin:0;font:900 clamp(30px,5vw,46px)/.92 var(--f-disp);text-transform:uppercase;text-wrap:balance}
+.ticket .by{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#7a5a3c}
+.ticket h3{margin:6px 0 0;font:500 10.5px var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:#c8342b}
+.ticket p{margin:0;max-width:65ch}
+.ticket ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font:500 11px var(--f-mono);padding:3px 9px;border-radius:999px;background:#efe7d8}
+.snip{border-radius:6px;overflow:hidden;border:1px solid #2a2f5c}
+.snip .sh{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#141a44;color:#cfd6ff;padding:8px 12px;font:500 11px var(--f-mono)}
+.snip .sh button{font:600 11px var(--f-body);background:var(--signal);color:#111;border:0;border-radius:4px;padding:4px 10px;cursor:pointer}
+.snip pre{margin:0;padding:14px;background:#0b1030;color:#e6e9ff;font:500 12.5px/1.6 var(--f-mono);overflow-x:auto}
+.soon{padding:14px;border:1.5px dashed #c9b99c;border-radius:6px;color:#7a5a3c}
+
+@media (max-width:720px){
+  .detail{grid-template-columns:1fr}
+  .detail .cover{width:160px}
+  .shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .cover .ct{font-size:20px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="back" href="./">Back to the city line</a>
+    <span class="back" style="border:0;opacity:.7" id="count"></span>
+  </div>
+
+  <main id="view"></main>
+</div>
+
+<script>
+/*
+  HOW TO UPDATE THE BOOKSTALL
+  Add, edit or reorder books in this list. Fields:
+    id        short name used in the link, letters/numbers/hyphens only
+    title     book title
+    author    author name
+    status    'reading' | 'finished' | 'next'
+    color     cover colour (any CSS colour)
+    tags      a few short labels
+    summary   one or two short paragraphs, in your own words
+    takeaways a few bullet points
+    snippets  code snippets: { title, lang, code }  (leave [] for "coming soon")
+*/
+const BOOKS = [
+  {
+    id: 'thinking-fast-and-slow',
+    title: 'Thinking, Fast and Slow',
+    author: 'Daniel Kahneman',
+    status: 'reading',
+    color: '#2b5aa6',
+    tags: ['Psychology', 'Decisions', 'Behavioural finance'],
+    summary: [
+      'Kahneman splits the mind into two characters. System 1 is fast, automatic and confident. System 2 is slow, careful and lazy, so it lets System 1 drive most of the time.',
+      'Most of the book is a tour of where System 1 quietly gets things wrong: anchoring on the first number it hears, judging by whatever comes to mind easily, and feeling losses about twice as strongly as equal gains.'
+    ],
+    takeaways: [
+      'The first number in the room anchors everyone. Worth remembering when quotas and targets get set.',
+      'Loss aversion explains why a clawback stings far more than a bonus of the same size feels good.',
+      'The planning fallacy is real: base estimates on similar past projects, not on the best case.'
+    ],
+    snippets: [
+      {
+        title: 'Loss aversion in a comp plan, roughly',
+        lang: 'python',
+        code: `def felt_value(payout_change, loss_weight=2.25, curve=0.88):
+    """Prospect-theory style value: losses hurt more than gains please."""
+    if payout_change >= 0:
+        return payout_change ** curve
+    return -loss_weight * (-payout_change) ** curve
+
+# A +$500 bonus vs a -$500 clawback
+print(round(felt_value(500), 1))   # feels like about +237
+print(round(felt_value(-500), 1))  # feels like about -534`
+      }
+    ]
+  },
+  {
+    id: 'mans-search-for-meaning',
+    title: "Man's Search for Meaning",
+    author: 'Viktor E. Frankl',
+    status: 'reading',
+    color: '#5a3e2a',
+    tags: ['Philosophy', 'Psychology', 'Resilience'],
+    summary: [
+      'Frankl, a psychiatrist, survived the Nazi concentration camps and wrote about what kept people going when everything else was taken away. His answer is meaning: a reason to keep going that points beyond yourself.',
+      'The second half introduces logotherapy, his idea that we find meaning through the work we do, the people we love, and the attitude we choose toward suffering we cannot avoid.'
+    ],
+    takeaways: [
+      'Between what happens to you and how you respond, there is a space, and the choice in that space is yours.',
+      'Meaning comes from work, love and attitude, not from chasing happiness directly.',
+      'A clear "why" makes almost any "how" bearable.'
+    ],
+    snippets: []
+  }
+];
+
+const STATUS = { reading: 'Reading now', finished: 'Finished', next: 'Up next' };
+const view = document.getElementById('view');
+let filter = 'all';
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function cover(b){ return `<div class="cover" style="background:${esc(b.color)}"><span class="ct">${esc(b.title)}</span><span class="ca">${esc(b.author)}</span></div>`; }
+
+function shelf(){
+  const list = BOOKS.filter(b => filter === 'all' || b.status === filter);
+  const reading = BOOKS.filter(b => b.status === 'reading').length;
+  document.getElementById('count').textContent = `${reading} on the go · ${BOOKS.length} on the shelf`;
+  const btn = (k, label) => `<button type="button" data-f="${k}" aria-pressed="${filter === k}">${label}</button>`;
+  view.innerHTML = `
+    <div style="display:grid;gap:0">
+      <div class="awning" aria-hidden="true"></div>
+      <div class="sign"><small>Platform 1 · bookstall</small><h1>What I am reading</h1>
+      <p>Every journey needs something to read on the train. Tap a book for a short summary, what I took from it, and the code snippets it sparked.</p></div>
+    </div>
+    <div class="filters" role="group" aria-label="Filter books">${btn('all','All')}${btn('reading','Reading now')}${btn('finished','Finished')}${btn('next','Up next')}</div>
+    ${list.length ? `<div class="shelf">${list.map(b => `
+      <a class="book" href="#${esc(b.id)}" aria-label="${esc(b.title)} by ${esc(b.author)}">
+        ${cover(b)}
+        <span class="meta"><b>${esc(b.title)}</b><span class="pill s-${esc(b.status)}">${STATUS[b.status] || ''}</span></span>
+      </a>`).join('')}</div>` : `<div class="empty">Nothing on this shelf yet.</div>`}`;
+  view.querySelectorAll('[data-f]').forEach(el => el.addEventListener('click', () => { filter = el.dataset.f; shelf(); }));
+  document.title = 'Platform Bookstall';
+}
+
+function detail(b){
+  const snips = b.snippets && b.snippets.length
+    ? b.snippets.map((s, i) => `<div class="snip"><div class="sh"><span>${esc(s.title)} · ${esc(s.lang)}</span><button type="button" data-copy="${i}">Copy</button></div><pre><code>${esc(s.code)}</code></pre></div>`).join('')
+    : `<div class="soon">Code snippets for this one are coming soon.</div>`;
+  view.innerHTML = `
+    <div class="detail">
+      ${cover(b)}
+      <article class="ticket">
+        <div class="tk"><span>${STATUS[b.status] || ''}</span><a href="#" style="color:#fff">All books</a></div>
+        <div class="bd">
+          <h2>${esc(b.title)}</h2>
+          <div class="by">${esc(b.author)}</div>
+          <div class="tags">${(b.tags || []).map(t => `<span>${esc(t)}</span>`).join('')}</div>
+          <h3>In short</h3>
+          ${(b.summary || []).map(p => `<p>${esc(p)}</p>`).join('')}
+          <h3>What I took from it</h3>
+          <ul>${(b.takeaways || []).map(t => `<li>${esc(t)}</li>`).join('')}</ul>
+          <h3>Code snippets</h3>
+          ${snips}
+        </div>
+      </article>
+    </div>`;
+  view.querySelectorAll('[data-copy]').forEach(el => el.addEventListener('click', () => {
+    const code = b.snippets[+el.dataset.copy].code;
+    try { navigator.clipboard.writeText(code).then(() => { el.textContent = 'Copied'; setTimeout(() => el.textContent = 'Copy', 1500); }, () => {}); } catch (e) {}
+  }));
+  document.title = b.title + ' · Platform Bookstall';
+  scrollTo(0, 0);
+}
+
+function route(){
+  const id = location.hash.slice(1);
+  const b = BOOKS.find(x => x.id === id);
+  b ? detail(b) : shelf();
+}
+addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>
