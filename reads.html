@@ -127,7 +127,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-off
 const BOOKS = [
   {
     id: 'kafka-on-the-shore', title: 'Kafka on the Shore', author: 'Haruki Murakami',
-    status: 'finished', fav: false, lang: 'en', color: '#1f5c63',
+    status: 'reading', fav: false, lang: 'en', color: '#1f5c63',
     tags: ['Novel', 'Magical realism'],
     summary: [
       'Two stories run side by side. Kafka Tamura, fifteen, runs away from home in Tokyo and ends up living in a quiet private library. Nakata, an old man who lost the ability to read after a strange childhood incident, can talk to cats and sets off on a journey of his own.',
@@ -180,6 +180,50 @@ print(round(compound(daily_gain=-0.01), 2))  # 0.03x if you slip 1% a day`
     snippets: []
   },
   {
+    id: 'sapiens', title: 'Sapiens', author: 'Yuval Noah Harari',
+    status: 'finished', fav: false, lang: 'en', color: '#8a6a2e',
+    tags: ['History', 'Big ideas'],
+    summary: [
+      'A brief history of humankind told through three big shifts: the cognitive revolution, the agricultural revolution and the scientific revolution.',
+      'The big idea: humans rule the planet because we can cooperate in huge numbers around shared stories, like money, nations, companies and religions, that exist only because we all believe in them.'
+    ],
+    ideas: ['Money is the most successful shared story ever told.', 'Progress for the species is not always progress for the individual.'],
+    snippets: []
+  },
+  {
+    id: 'the-wealth-money-cant-buy', title: "The Wealth Money Can't Buy", author: 'Robin Sharma',
+    status: 'finished', fav: false, lang: 'en', color: '#2e5d73',
+    tags: ['Life', 'Self-growth'],
+    summary: [
+      'Robin Sharma argues that money is only one of eight forms of wealth. The others are growth, wellness, family, craft, community, adventure and service.',
+      'The book is a practical nudge to check how rich your life is on all eight, not just the one that shows up in a bank statement.'
+    ],
+    ideas: ['Being rich in one form of wealth and broke in the rest is still being broke.', 'Small daily rituals build the forms of wealth that matter most.'],
+    snippets: []
+  },
+  {
+    id: 'the-mountain-is-you', title: 'The Mountain Is You', author: 'Brianna Wiest',
+    status: 'finished', fav: false, lang: 'en', color: '#4a5a6e',
+    tags: ['Psychology', 'Self-growth'],
+    summary: [
+      'A book about self-sabotage. Wiest argues that the biggest obstacle in most lives is not out there, it is the habits and fears we keep repeating to stay comfortable.',
+      'It walks through how to spot those patterns, understand what they are protecting you from, and build the emotional resilience to climb past them.'
+    ],
+    ideas: ['Self-sabotage is usually an unmet need, not a lack of willpower.', 'The goal is not to conquer the mountain but to master yourself.'],
+    snippets: []
+  },
+  {
+    id: 'the-joys-of-compounding', title: 'The Joys of Compounding', author: 'Gautam Baid',
+    status: 'finished', fav: false, lang: 'en', color: '#3b6b4f',
+    tags: ['Investing', 'Value investing', 'Life'],
+    summary: [
+      'Gautam Baid mixes value investing with life lessons, leaning heavily on Buffett, Munger and a lot of good reading.',
+      'The thread through it all: compounding works on money, knowledge and character in the same way. Be patient, keep learning, and let time do the heavy lifting.'
+    ],
+    ideas: ['Compounding knowledge is as powerful as compounding capital.', 'Patience is an edge most people refuse to use.'],
+    snippets: []
+  },
+  {
     id: 'maidanam', title: 'Maidanam', native: 'మైదానం', author: 'Chalam', nativeAuthor: 'చలం',
     status: 'finished', fav: true, lang: 'te', color: '#8a3b2a',
     tags: ['Telugu', 'Novel', 'Classic'],
@@ -227,9 +271,19 @@ print(round(compound(daily_gain=-0.01), 2))  # 0.03x if you slip 1% a day`
     status: 'finished', fav: true, lang: 'te', color: '#c47a1e',
     tags: ['Telugu', 'Poetry', 'Wit'],
     summary: [
-      'Sri Sri at play. The title packs three kinds of verse into one word: సిరి సిరి మువ్వలు, ప్రాసలు,లిమరిక్కులు (Limericks). Short, witty and often quietly savage.'
+      'Sri Sri at play. The title packs three kinds of verse into one word: Sirisiri Muvvalu, Prasnalu (questions) and Limericks. Short, witty and often quietly savage.'
     ],
     ideas: ['Humour is a sharp tool for saying serious things.'],
+    snippets: []
+  },
+  {
+    id: 'antarmukham', title: 'Antarmukham', native: 'అంతర్ముఖం', author: 'Yandamoori Veerendranath', nativeAuthor: 'యండమూరి వీరేంద్రనాథ్',
+    status: 'finished', fav: false, lang: 'te', color: '#4b3a7a',
+    tags: ['Telugu', 'Novel'],
+    summary: [
+      'The title means looking inward, and the novel does exactly that. Yandamoori follows a man taking stock of his life, his relationships and the choices that shaped him.'
+    ],
+    ideas: ['Looking back honestly is the first step to moving forward.'],
     snippets: []
   }
 ];
